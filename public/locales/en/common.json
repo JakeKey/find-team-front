@@ -1,0 +1,10 @@
+{
+  "General": {
+    "next": "Next",
+    "go_back": "Go Back"
+  },
+  "Auth": {
+    "username": "Username",
+    "password": "Password"
+  }
+}

@@ -2,6 +2,8 @@ import { Formik, Form } from 'formik';
 
 import InputText from 'components/InputText';
 
+import useTranslationPrefix from 'utils/useTranslationPrefix';
+
 import { Wrapper } from './styles';
 
 type Props = {
@@ -9,20 +11,31 @@ type Props = {
 };
 
 export type LoginFormTypes = {
-  login: string;
+  username: string;
   password: string;
 };
 
 const LoginForm: React.FC<Props> = ({ children, handleSubmit }) => {
-  const initialValues: LoginFormTypes = { login: '', password: '' };
+  const t = useTranslationPrefix('Auth');
+  const initialValues: LoginFormTypes = { username: '', password: '' };
 
   return (
     <Wrapper>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         {({ errors, isSubmitting }) => (
           <Form>
-            <InputText name="login" placeholder="login" error={errors.login} />
-            <InputText name="password" placeholder="password" error={errors.password} />
+            <InputText
+              name="username"
+              type="text"
+              placeholder={t('username')}
+              error={errors.username}
+            />
+            <InputText
+              name="password"
+              type="password"
+              placeholder={t('password')}
+              error={errors.password}
+            />
           </Form>
         )}
       </Formik>
