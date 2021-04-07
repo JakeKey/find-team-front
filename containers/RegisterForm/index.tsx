@@ -7,20 +7,21 @@ import Button from 'components/Button';
 import useTranslationPrefix from 'utils/useTranslationPrefix';
 
 type Props = {
-  handleSubmit: (values: LoginFormTypes) => void;
+  handleSubmit: (values: RegisterFormTypes) => void;
 };
 
-export type LoginFormTypes = {
+export type RegisterFormTypes = {
   username: string;
   password: string;
+  passwordConfirm: string;
 };
 
-const LoginForm: React.FC<Props> = ({ handleSubmit }) => {
+const RegisterForm: React.FC<Props> = ({ handleSubmit }) => {
   const t = useTranslationPrefix('Auth');
-  const initialValues: LoginFormTypes = { username: '', password: '' };
+  const initialValues: RegisterFormTypes = { username: '', password: '', passwordConfirm: '' };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+    <Formik initialValues={initialValues} onSubmit={handleSubmit} enableReinitialize>
       {({ errors, isSubmitting }) => (
         <Form>
           <InputText
@@ -37,11 +38,18 @@ const LoginForm: React.FC<Props> = ({ handleSubmit }) => {
             placeholder={t('password')}
             error={errors.password}
           />
-          <Button text={t('log_in')} type="submit" />
+          <InputText
+            label={t('retype_password')}
+            name="passwordConfirm"
+            type="password"
+            placeholder={t('retype_password')}
+            error={errors.passwordConfirm}
+          />
+          <Button text={t('register')} type="submit" />
         </Form>
       )}
     </Formik>
   );
 };
 
-export default memo(LoginForm);
+export default memo(RegisterForm);

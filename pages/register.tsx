@@ -3,21 +3,21 @@ import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import AuthLayout from 'containers/AuthLayout';
-import LoginForm, { LoginFormTypes } from 'containers/LoginForm';
+import RegisterForm, { RegisterFormTypes } from 'containers/RegisterForm';
 
 import useTranslationPrefix from 'utils/useTranslationPrefix';
 
-const Login: React.FC = () => {
+const Register: React.FC = () => {
   const tg = useTranslationPrefix('General');
   const t = useTranslationPrefix('Auth');
 
-  const handleSubmit = useCallback((values: LoginFormTypes): void => {
+  const handleSubmit = useCallback((values: RegisterFormTypes): void => {
     console.log(values);
   }, []);
 
   return (
-    <AuthLayout title={t('log_in')}>
-      <LoginForm handleSubmit={handleSubmit} />
+    <AuthLayout title={t('register')}>
+      <RegisterForm handleSubmit={handleSubmit} />
     </AuthLayout>
   );
 };
@@ -32,4 +32,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default Login;
+export default Register;

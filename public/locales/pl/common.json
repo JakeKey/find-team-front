@@ -1,10 +1,14 @@
 {
   "General": {
     "next": "Dalej",
-    "go_back": "Wróć"
+    "go_back": "Wróć",
+    "page_title": "{{title}} - Find Your Team"
   },
   "Auth": {
     "username": "Nazwa użytkownika",
-    "password": "Hasło"
+    "password": "Hasło",
+    "retype_password": "Powtórz hasło",
+    "register": "Zarejestruj się",
+    "log_in": "Zaloguj się"
   }
 }

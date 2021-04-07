@@ -14,7 +14,6 @@ const Home: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Find Your Team</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
     </>
