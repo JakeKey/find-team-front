@@ -36,8 +36,8 @@ module.exports = {
 
         // This rule is not compatible with Next.js's <Link /> components
         'jsx-a11y/anchor-is-valid': 'off',
-
         'prettier/prettier': ['warn', {}, { usePrettierrc: true }], // Includes .prettierrc.js rules
+        '@typescript-eslint/no-unused-vars': 'warn',
 
         // I suggest this setting for requiring return types on functions only where useful
         '@typescript-eslint/explicit-function-return-type': [

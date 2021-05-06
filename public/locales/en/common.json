@@ -9,6 +9,7 @@
     "password": "Password",
     "retype_password": "Re-type password",
     "register": "Register",
-    "log_in": "Log In"
+    "log_in": "Log In",
+    "email": "E-mail address"
   }
 }

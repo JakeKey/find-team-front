@@ -5,6 +5,7 @@ import InputText from 'components/InputText';
 import Button from 'components/Button';
 
 import useTranslationPrefix from 'utils/useTranslationPrefix';
+import { UserPositions } from 'types/enums';
 
 type Props = {
   handleSubmit: (values: RegisterFormTypes) => void;
@@ -14,16 +15,30 @@ export type RegisterFormTypes = {
   username: string;
   password: string;
   passwordConfirm: string;
+  email: string;
+  userPosition?: UserPositions;
 };
 
 const RegisterForm: React.FC<Props> = ({ handleSubmit }) => {
   const t = useTranslationPrefix('Auth');
-  const initialValues: RegisterFormTypes = { username: '', password: '', passwordConfirm: '' };
+  const initialValues: RegisterFormTypes = {
+    username: '',
+    password: '',
+    passwordConfirm: '',
+    email: '',
+  };
 
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit} enableReinitialize>
       {({ errors, isSubmitting }) => (
         <Form>
+          <InputText
+            label={t('email')}
+            name="email"
+            type="email"
+            placeholder={t('email')}
+            error={errors.email}
+          />
           <InputText
             label={t('username')}
             name="username"
@@ -45,6 +60,7 @@ const RegisterForm: React.FC<Props> = ({ handleSubmit }) => {
             placeholder={t('retype_password')}
             error={errors.passwordConfirm}
           />
+
           <Button text={t('register')} type="submit" />
         </Form>
       )}
