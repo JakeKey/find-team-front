@@ -11,4 +11,6 @@ export interface UserType {
   registered: boolean;
 }
 
-export type RegisterArgsType = Pick<UserType, 'username' | 'password' | 'email' | 'position'>;
+export type RegisterArgsType = Pick<UserType, 'username' | 'password' | 'email' | 'position'> & {
+  reCaptchaResponse: string;
+};

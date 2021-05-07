@@ -21,6 +21,7 @@ export type RegisterFormTypes = {
 
 const RegisterForm: React.FC<Props> = ({ handleSubmit }) => {
   const t = useTranslationPrefix('Auth');
+
   const initialValues: RegisterFormTypes = {
     username: '',
     password: '',
