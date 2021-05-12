@@ -1,4 +1,5 @@
-import { Action, RegisterArgsType } from 'types/interfaces';
+import { ErrorCodes } from 'types/enums';
+import { Action, RegisterReqBody } from 'types/interfaces';
 
 export enum AUTH {
   REGISTER_REQUESTED = 'REGISTER_REQUESTED',
@@ -6,31 +7,31 @@ export enum AUTH {
   REGISTER_FAILED = 'REGISTER_FAILED',
 }
 
-export type RegisterActionType = Action<AUTH.REGISTER_REQUESTED, RegisterArgsType>;
-export type RegisterActionSuccessType = Action<AUTH.REGISTER_SUCCEEDED, RegisterArgsType>;
-export type RegisterActionErrorType = Action<AUTH.REGISTER_FAILED, undefined>;
+export type RegisterActionType = Action<AUTH.REGISTER_REQUESTED, RegisterReqBody>;
+export type RegisterActionSuccessType = Action<AUTH.REGISTER_SUCCEEDED, undefined>;
+export type RegisterActionErrorType = Action<AUTH.REGISTER_FAILED, ErrorCodes>;
 
 export type AuthActionTypes =
   | RegisterActionType
   | RegisterActionSuccessType
   | RegisterActionErrorType;
 
-export const registerAction = (data: RegisterArgsType): RegisterActionType => {
+export const registerAction = (data: RegisterReqBody): RegisterActionType => {
   return {
     type: AUTH.REGISTER_REQUESTED,
     payload: data,
   };
 };
 
-export const registerActionSuccess = (data: RegisterArgsType): RegisterActionSuccessType => {
+export const registerActionSuccess = (): RegisterActionSuccessType => {
   return {
     type: AUTH.REGISTER_SUCCEEDED,
-    payload: data,
   };
 };
 
-export const registerActionError = (): RegisterActionErrorType => {
+export const registerActionError = (error: ErrorCodes): RegisterActionErrorType => {
   return {
     type: AUTH.REGISTER_FAILED,
+    payload: error,
   };
 };

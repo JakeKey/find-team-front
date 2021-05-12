@@ -1,14 +1,13 @@
 import { AuthActionTypes } from 'store/actions';
+import { ErrorCodes } from 'types/enums';
 
 export interface AuthStateType {
-  jwt?: string;
-  registered?: boolean;
+  token?: string;
   isLoading: boolean;
+  error?: ErrorCodes;
 }
 
 export const INITIAL_STATE_AUTH: AuthStateType = {
-  jwt: '',
-  registered: false,
   isLoading: false,
 };
 
@@ -22,7 +21,6 @@ export const authReducer = (state = INITIAL_STATE_AUTH, action: AuthActionTypes)
     case 'REGISTER_SUCCEEDED':
       return {
         ...state,
-        ...action.payload,
         isLoading: false,
       };
     case 'REGISTER_FAILED':
