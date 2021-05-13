@@ -12,9 +12,21 @@ export const colors = {
 };
 
 export const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: WorkSans;
+    src: url('fonts/WorkSans/WorkSans.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: WorkSans;
+    font-style: italic;
+    src: url('fonts/WorkSans/WorkSans-Italic.ttf') format('truetype');
+  }
+
   body {
     margin: 0;
     padding: 0;
     background-color: ${colors.darkGray};
+
+    font-family: WorkSans, Arial, Helvetica, sans-serif;
   }
 `;

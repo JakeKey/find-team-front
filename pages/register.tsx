@@ -19,10 +19,18 @@ const Register: React.FC = () => {
   const handleSubmit = useCallback(
     async (values: RegisterFormTypes): Promise<void> => {
       if (!executeRecaptcha) return; // TODO handle error
-      const { username, password, email } = values;
+      const { username, password, email, position } = values;
       const token = await executeRecaptcha('login_page');
 
-      dispatch(registerAction({ username, password, email, reCaptchaResponse: token }));
+      dispatch(
+        registerAction({
+          username,
+          password,
+          email,
+          position: position || undefined,
+          reCaptchaResponse: token,
+        })
+      );
     },
     [executeRecaptcha]
   );

@@ -14,6 +14,7 @@ export const FormContainer = styled.div`
 `;
 
 export const Header = styled.h2`
-  font-size: 18px;
+  font-size: 26px;
   padding-bottom: 20px;
+  font-family: WorkSans;
 `;

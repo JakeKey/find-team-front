@@ -2,7 +2,14 @@
   "General": {
     "next": "Next",
     "go_back": "Go Back",
-    "page_title": "{{title}} - Find Your Team"
+    "page_title": "{{title}} - Find Your Team",
+    "frontend": "Frontend Developer",
+    "backend": "Backend Developer",
+    "fullstack": "Fullstack Developer",
+    "designer": "UI/UX designer",
+    "PM": "Project Manager",
+    "PO": "Product Owner",
+    "other": "Other Position"
   },
   "Auth": {
     "username": "Username",
@@ -10,6 +17,7 @@
     "retype_password": "Re-type password",
     "register": "Register",
     "log_in": "Log In",
-    "email": "E-mail address"
+    "email": "E-mail address",
+    "position": "Position (optional)"
   }
 }
