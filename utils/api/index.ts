@@ -1,4 +1,4 @@
-import { ResponseModel } from 'types/interfaces';
+import { ResponseModel, ResponseSuccess } from 'types/interfaces';
 
 import auth from './auth';
 
@@ -11,7 +11,7 @@ export const fetchApi = async <T>(
   url: string,
   method: FetchMethods = 'GET',
   body?: Record<string, unknown>
-): Promise<T> => {
+): Promise<ResponseSuccess<T>> => {
   const response = await fetch(url, {
     method,
     body: JSON.stringify(body),
@@ -21,9 +21,9 @@ export const fetchApi = async <T>(
     },
   });
 
-  const { data, error }: ResponseModel<T> = await response.json();
+  const { data, error, success }: ResponseModel<T> = await response.json();
   if (error) throw new Error(error);
-  return data;
+  return { data, success };
 };
 
 export default {

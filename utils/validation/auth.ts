@@ -17,3 +17,8 @@ export const validateRegister = yup.object().shape({
     .required(),
   position: yup.string().oneOf(Object.values(UserPositions)),
 });
+
+export const validateLogin = yup.object().shape({
+  usernameOrEmail: yup.string().min(3).max(128).required(),
+  password: yup.string().min(8).max(128).required(),
+});

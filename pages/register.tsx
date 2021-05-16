@@ -1,26 +1,38 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 import AuthLayout from 'containers/AuthLayout';
 import RegisterForm, { RegisterFormTypes } from 'containers/RegisterForm';
+import LinkButton from 'components/LinkButton';
 
-import useTranslationPrefix from 'utils/useTranslationPrefix';
-import { dispatch } from 'store';
+import useTranslationPrefix from 'hooks/useTranslationPrefix';
+import { useAppDispatch, useAppSelector } from 'store';
 import { registerAction } from 'store/actions';
+import { authSelectors } from 'store/selectors';
+import useAuth from 'hooks/useAuth';
 
 const Register: React.FC = () => {
+  useAuth(true);
   const tg = useTranslationPrefix('General');
   const t = useTranslationPrefix('Auth');
+  const dispatch = useAppDispatch();
+  const { error, success, isLoading } = useAppSelector(authSelectors.selectAuthState);
 
   const { executeRecaptcha } = useGoogleReCaptcha();
 
+  useEffect(() => {
+    if (error) {
+      // TODO display error toast
+    }
+  }, [error]);
+
   const handleSubmit = useCallback(
     async (values: RegisterFormTypes): Promise<void> => {
-      if (!executeRecaptcha) return; // TODO handle error
+      if (!executeRecaptcha || isLoading) return; // TODO handle error
       const { username, password, email, position } = values;
-      const token = await executeRecaptcha('login_page');
+      const token = await executeRecaptcha('register');
 
       dispatch(
         registerAction({
@@ -32,12 +44,19 @@ const Register: React.FC = () => {
         })
       );
     },
-    [executeRecaptcha]
+    [executeRecaptcha, dispatch, isLoading]
   );
 
   return (
     <AuthLayout title={t('register')}>
-      <RegisterForm handleSubmit={handleSubmit} />
+      {!success ? (
+        <>
+          <RegisterForm handleSubmit={handleSubmit} />
+          <LinkButton text={t('already_registered')} href="/login" />
+        </>
+      ) : (
+        <div>registered, TODO - send verification mail</div>
+      )}
     </AuthLayout>
   );
 };

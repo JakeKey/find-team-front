@@ -5,7 +5,7 @@ import InputText from 'components/InputText';
 import Button from 'components/Button';
 import Select, { OptionType } from 'components/Select';
 
-import useTranslationPrefix from 'utils/useTranslationPrefix';
+import useTranslationPrefix from 'hooks/useTranslationPrefix';
 import { UserPositions } from 'types/enums';
 import { validateRegister } from 'utils/validation';
 import { UserType } from 'types/interfaces';
@@ -71,7 +71,7 @@ const RegisterForm: React.FC<Props> = ({ handleSubmit }) => {
             placeholder={t('retype_password')}
             error={touched.repassword && errors.repassword}
           />
-          <Select name="position" options={positionOptions} label={t('position_optional')} />
+          <Select name="position" options={[...positionOptions]} label={t('position_optional')} />
 
           <Button
             text={t('register')}

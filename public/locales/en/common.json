@@ -18,6 +18,11 @@
     "register": "Register",
     "log_in": "Log In",
     "email": "E-mail address",
-    "position": "Position (optional)"
+    "position": "Position (optional)",
+    "no_account_register": "No account? Register!",
+    "already_registered": "Already registered? Login!"
+  },
+  "Dashboard": {
+    "dashboard": "Dashboard"
   }
 }

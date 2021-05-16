@@ -1,10 +1,10 @@
 import { AuthActionTypes } from 'store/actions';
-import { ErrorCodes } from 'types/enums';
+import { ErrorCodes, SuccessCodes } from 'types/enums';
 
 export interface AuthStateType {
-  token?: string;
   isLoading: boolean;
   error?: ErrorCodes;
+  success?: SuccessCodes;
 }
 
 export const INITIAL_STATE_AUTH: AuthStateType = {
@@ -22,11 +22,34 @@ export const authReducer = (state = INITIAL_STATE_AUTH, action: AuthActionTypes)
       return {
         ...state,
         isLoading: false,
+        success: action.payload,
+        error: undefined,
       };
     case 'REGISTER_FAILED':
       return {
         ...state,
         isLoading: false,
+        success: undefined,
+        error: action.payload,
+      };
+    case 'LOGIN_REQUESTED':
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case 'LOGIN_SUCCEEDED':
+      return {
+        ...state,
+        isLoading: false,
+        error: undefined,
+        success: action.payload,
+      };
+    case 'LOGIN_FAILED':
+      return {
+        ...state,
+        isLoading: false,
+        success: undefined,
+        error: action.payload,
       };
     default:
       return state;

@@ -10,7 +10,7 @@ type Props = {
   children: ReactNode;
 };
 
-const AuthLayout: React.FC<Props> = ({ title, children }) => {
+const DashboardLayout: React.FC<Props> = ({ title, children }) => {
   const t = useTranslationPrefix('General');
 
   return (
@@ -18,12 +18,9 @@ const AuthLayout: React.FC<Props> = ({ title, children }) => {
       <Head>
         <title>{t('page_title', { title })}</title>
       </Head>
-      <FormContainer>
-        <Header>{title}</Header>
-        {children}
-      </FormContainer>
+      <FormContainer>{children}</FormContainer>
     </>
   );
 };
 
-export default memo(AuthLayout);
+export default memo(DashboardLayout);

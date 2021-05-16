@@ -1,14 +1,16 @@
 import { UserType } from './user';
 
-export type RegisterReqBody = Pick<UserType, 'username' | 'password' | 'email' | 'position'> & {
+type ReCaptchaReq = {
   reCaptchaResponse: string;
 };
 
+export type RegisterReqBody = Pick<UserType, 'username' | 'password' | 'email' | 'position'> &
+  ReCaptchaReq;
+
 export type LoginReqBody = Pick<UserType, 'password'> &
-  Partial<Pick<UserType, 'username' | 'email'>>;
+  Partial<Pick<UserType, 'username' | 'email'>> &
+  ReCaptchaReq;
 
-export type RegisterResponse = null;
+export type RegisterResponseData = null;
 
-export interface LoginResponse {
-  token: string;
-}
+export type LoginResponseData = { token: string };

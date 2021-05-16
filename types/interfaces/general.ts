@@ -10,3 +10,5 @@ export interface ResponseModel<T> {
   success?: SuccessCodes;
   error?: ErrorCodes;
 }
+
+export type ResponseSuccess<T> = Pick<ResponseModel<T>, 'data' | 'success'>;

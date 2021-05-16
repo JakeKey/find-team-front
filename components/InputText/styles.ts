@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
 `;
 
 const inputStyle = css`
-  width: 300px;
+  width: 350px;
   color: ${colors.darkBlue};
   background-color: ${colors.lightGray};
   font-weight: bold;

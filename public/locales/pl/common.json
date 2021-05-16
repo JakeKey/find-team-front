@@ -18,6 +18,11 @@
     "register": "Zarejestruj się",
     "log_in": "Zaloguj się",
     "email": "Adres e-mail",
-    "position_optional": "Stanowisko (opcjonalne)"
+    "position_optional": "Stanowisko (opcjonalne)",
+    "no_account_register": "Nie masz konta? Zarejestruj się!",
+    "already_registered": "Zarejestrowany? Zaloguj się!"
+  },
+  "Dashboard": {
+    "dashboard": "Dashboard"
   }
 }

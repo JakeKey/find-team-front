@@ -14,12 +14,12 @@ export const colors = {
 export const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: WorkSans;
-    src: url('fonts/WorkSans/WorkSans.ttf') format('truetype');
+    src: url('/fonts/WorkSans/WorkSans.ttf') format('truetype');
   }
   @font-face {
     font-family: WorkSans;
     font-style: italic;
-    src: url('fonts/WorkSans/WorkSans-Italic.ttf') format('truetype');
+    src: url('/fonts/WorkSans/WorkSans-Italic.ttf') format('truetype');
   }
 
   body {
@@ -30,3 +30,21 @@ export const GlobalStyle = createGlobalStyle`
     font-family: WorkSans, Arial, Helvetica, sans-serif;
   }
 `;
+
+const MD_LG_BREAKPOINT = 1024;
+const SM_MD_BREAKPOINT = 550;
+
+export const breakpoints = {
+  sm: {
+    min: 0,
+    max: SM_MD_BREAKPOINT,
+  },
+  md: {
+    min: SM_MD_BREAKPOINT,
+    max: MD_LG_BREAKPOINT,
+  },
+  lg: {
+    min: MD_LG_BREAKPOINT,
+    max: null,
+  },
+};

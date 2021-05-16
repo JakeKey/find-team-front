@@ -1,20 +1,42 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, StrictEffect } from 'redux-saga/effects';
 
-import { registerActionError, registerActionSuccess } from 'store/actions';
-import { ErrorCodes } from 'types/enums';
-import { RegisterReqBody } from 'types/interfaces';
+import {
+  loginActionError,
+  loginActionSuccess,
+  LoginActionType,
+  registerActionError,
+  registerActionSuccess,
+  RegisterActionType,
+} from 'store/actions';
+import { ErrorCodes, SuccessCodes } from 'types/enums';
+import { LoginResponseData, RegisterResponseData, ResponseSuccess } from 'types/interfaces';
 import api from 'utils/api';
 
-interface RegisterAction {
-  type: string;
-  payload: RegisterReqBody;
-}
+const {
+  auth: { register, login },
+} = api;
 
-export function* authRegister(action: RegisterAction): Generator {
+export function* authRegister(
+  action: RegisterActionType
+): Generator<StrictEffect, void, ResponseSuccess<RegisterResponseData>> {
   try {
-    yield call(api.auth.register, action.payload);
-    yield put(registerActionSuccess());
+    const result = yield call(register, action.payload);
+    yield put(registerActionSuccess(result?.success || SuccessCodes.SUCCESS));
   } catch (e) {
     yield put(registerActionError(e?.message || ErrorCodes.SOMETHING_WENT_WRONG));
+  }
+}
+
+export function* authLogin(
+  action: LoginActionType
+): Generator<StrictEffect, void, ResponseSuccess<LoginResponseData>> {
+  try {
+    const result = yield call(login, action.payload);
+    if (!result?.data?.token) throw new Error();
+
+    global.localStorage?.setItem('token', result.data.token);
+    yield put(loginActionSuccess(result.success || SuccessCodes.LOGIN_SUCCESS));
+  } catch (e) {
+    yield put(loginActionError(e?.message || ErrorCodes.SOMETHING_WENT_WRONG));
   }
 }

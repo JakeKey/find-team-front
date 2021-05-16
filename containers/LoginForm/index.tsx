@@ -4,40 +4,46 @@ import { Formik, Form } from 'formik';
 import InputText from 'components/InputText';
 import Button from 'components/Button';
 
-import useTranslationPrefix from 'utils/useTranslationPrefix';
+import useTranslationPrefix from 'hooks/useTranslationPrefix';
+import { validateLogin } from 'utils/validation';
 
 type Props = {
   handleSubmit: (values: LoginFormTypes) => void;
 };
 
 export type LoginFormTypes = {
-  username: string;
+  usernameOrEmail: string;
   password: string;
 };
 
 const LoginForm: React.FC<Props> = ({ handleSubmit }) => {
   const t = useTranslationPrefix('Auth');
-  const initialValues: LoginFormTypes = { username: '', password: '' };
+  const initialValues: LoginFormTypes = { usernameOrEmail: '', password: '' };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-      {({ errors, isSubmitting }) => (
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+      validationSchema={validateLogin}
+      enableReinitialize
+    >
+      {({ errors, isSubmitting, isValid, dirty, touched }) => (
         <Form>
           <InputText
             label={t('username')}
-            name="username"
+            name="usernameOrEmail"
             type="text"
             placeholder={t('username')}
-            error={errors.username}
+            error={touched.usernameOrEmail && errors.usernameOrEmail}
           />
           <InputText
             label={t('password')}
             name="password"
             type="password"
             placeholder={t('password')}
-            error={errors.password}
+            error={touched.password && errors.password}
           />
-          <Button text={t('log_in')} type="submit" />
+          <Button text={t('log_in')} type="submit" disabled={isSubmitting || !isValid || !dirty} />
         </Form>
       )}
     </Formik>
