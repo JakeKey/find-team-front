@@ -4,6 +4,8 @@ import {
   RegisterReqBody,
   RegisterResponseData,
   ResponseSuccess,
+  VerifyCodeReqBody,
+  VerifyCodeResponseData,
 } from 'types/interfaces';
 
 import { API_URL, fetchApi } from '.';
@@ -13,6 +15,7 @@ const ENDPOINT_PREFIX = '/auth';
 interface AuthApiHandlersTypes {
   register: (data: RegisterReqBody) => Promise<ResponseSuccess<RegisterResponseData>>;
   login: (data: LoginReqBody) => Promise<ResponseSuccess<LoginResponseData>>;
+  verify: (data: VerifyCodeReqBody) => Promise<ResponseSuccess<VerifyCodeResponseData>>;
 }
 
 const authApi: AuthApiHandlersTypes = {
@@ -20,6 +23,8 @@ const authApi: AuthApiHandlersTypes = {
     fetchApi<RegisterResponseData>(`${API_URL}${ENDPOINT_PREFIX}/register`, 'POST', data),
   login: async (data) =>
     fetchApi<LoginResponseData>(`${API_URL}${ENDPOINT_PREFIX}/login`, 'POST', data),
+  verify: async (data) =>
+    fetchApi<VerifyCodeResponseData>(`${API_URL}${ENDPOINT_PREFIX}/verify`, 'POST', data),
 };
 
 export default authApi;

@@ -9,7 +9,8 @@
     "designer": "UI/UX designer",
     "PM": "Project Manager",
     "PO": "Product Owner",
-    "other": "Other Position"
+    "other": "Other Position",
+    "loading": "Wczytywanie..."
   },
   "Auth": {
     "username": "Nazwa użytkownika",
@@ -20,7 +21,12 @@
     "email": "Adres e-mail",
     "position_optional": "Stanowisko (opcjonalne)",
     "no_account_register": "Nie masz konta? Zarejestruj się!",
-    "already_registered": "Zarejestrowany? Zaloguj się!"
+    "already_registered": "Zarejestrowany? Zaloguj się!",
+    "verify_title": "Weryfikacja adresu e-mail",
+    "mail_verified": "Sukces! Adres e-mail został potwierdzony",
+    "mail_verification_error": "Błąd weryfikacji adresu email",
+    "register_success": "Rejestracja udana, na Twój adres email wysłaliśmy wiadomość z linkiem aktywacyjnym",
+    "register_error": "Błąd rejestracji"
   },
   "Dashboard": {
     "dashboard": "Dashboard"

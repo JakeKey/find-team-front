@@ -8,6 +8,7 @@ import { RECAPTCHA_SITE_KEY } from 'utils/api';
 import { store } from 'store';
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
+  // TODO cancel saga queries on route change
   return (
     <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
       <Provider store={store}>

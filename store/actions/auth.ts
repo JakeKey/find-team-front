@@ -1,5 +1,5 @@
 import { ErrorCodes, SuccessCodes } from 'types/enums';
-import { Action, LoginReqBody, RegisterReqBody } from 'types/interfaces';
+import { Action, LoginReqBody, RegisterReqBody, VerifyCodeReqBody } from 'types/interfaces';
 
 export enum AUTH {
   REGISTER_REQUESTED = 'REGISTER_REQUESTED',
@@ -8,6 +8,9 @@ export enum AUTH {
   LOGIN_REQUESTED = 'LOGIN_REQUESTED',
   LOGIN_SUCCEEDED = 'LOGIN_SUCCEEDED',
   LOGIN_FAILED = 'LOGIN_FAILED',
+  VERIFY_REQUESTED = 'VERIFY_REQUESTED',
+  VERIFY_SUCCEEDED = 'VERIFY_SUCCEEDED',
+  VERIFY_FAILED = 'VERIFY_FAILED',
 }
 
 export type AuthActionTypes =
@@ -15,8 +18,11 @@ export type AuthActionTypes =
   | RegisterActionSuccessType
   | RegisterActionErrorType
   | LoginActionType
+  | LoginActionSuccessType
   | LoginActionErrorType
-  | LoginActionSuccessType;
+  | VerifyActionType
+  | VerifyActionSuccessType
+  | VerifyActionErrorType;
 
 export type RegisterActionType = Required<Action<AUTH.REGISTER_REQUESTED, RegisterReqBody>>;
 export type RegisterActionSuccessType = Required<Action<AUTH.REGISTER_SUCCEEDED, SuccessCodes>>;
@@ -64,6 +70,31 @@ export const loginActionSuccess = (payload: SuccessCodes): LoginActionSuccessTyp
 export const loginActionError = (payload: ErrorCodes): LoginActionErrorType => {
   return {
     type: AUTH.LOGIN_FAILED,
+    payload,
+  };
+};
+
+export type VerifyActionType = Required<Action<AUTH.VERIFY_REQUESTED, VerifyCodeReqBody>>;
+export type VerifyActionSuccessType = Required<Action<AUTH.VERIFY_SUCCEEDED, SuccessCodes>>;
+export type VerifyActionErrorType = Required<Action<AUTH.VERIFY_FAILED, ErrorCodes>>;
+
+export const verifyAction = (payload: VerifyCodeReqBody): VerifyActionType => {
+  return {
+    type: AUTH.VERIFY_REQUESTED,
+    payload,
+  };
+};
+
+export const verifyActionSuccess = (payload: SuccessCodes): VerifyActionSuccessType => {
+  return {
+    type: AUTH.VERIFY_SUCCEEDED,
+    payload,
+  };
+};
+
+export const verifyActionError = (payload: ErrorCodes): VerifyActionErrorType => {
+  return {
+    type: AUTH.VERIFY_FAILED,
     payload,
   };
 };

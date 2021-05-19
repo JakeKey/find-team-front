@@ -15,7 +15,6 @@ import useAuth from 'hooks/useAuth';
 
 const Register: React.FC = () => {
   useAuth(true);
-  const tg = useTranslationPrefix('General');
   const t = useTranslationPrefix('Auth');
   const dispatch = useAppDispatch();
   const { error, success, isLoading } = useAppSelector(authSelectors.selectAuthState);
@@ -49,13 +48,13 @@ const Register: React.FC = () => {
 
   return (
     <AuthLayout title={t('register')}>
-      {!success ? (
+      {success ? (
+        <div>{t('register_success')}</div>
+      ) : (
         <>
           <RegisterForm handleSubmit={handleSubmit} />
           <LinkButton text={t('already_registered')} href="/login" />
         </>
-      ) : (
-        <div>registered, TODO - send verification mail</div>
       )}
     </AuthLayout>
   );

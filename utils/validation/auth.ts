@@ -6,7 +6,7 @@ export const validateRegister = yup.object().shape({
   email: yup.string().email().max(128).required(),
   username: yup
     .string()
-    .matches(/^[a-z]+$/, 'Username must be alphanumeric')
+    .matches(/^[a-zA-Z0-9_]*$/, 'Username must be alphanumeric')
     .min(3)
     .max(30)
     .required(),

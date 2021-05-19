@@ -51,6 +51,25 @@ export const authReducer = (state = INITIAL_STATE_AUTH, action: AuthActionTypes)
         success: undefined,
         error: action.payload,
       };
+    case 'VERIFY_REQUESTED':
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case 'VERIFY_SUCCEEDED':
+      return {
+        ...state,
+        isLoading: false,
+        error: undefined,
+        success: action.payload,
+      };
+    case 'VERIFY_FAILED':
+      return {
+        ...state,
+        isLoading: false,
+        success: undefined,
+        error: action.payload,
+      };
     default:
       return state;
   }
