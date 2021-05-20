@@ -1,9 +1,11 @@
 import { memo, ReactNode } from 'react';
 import Head from 'next/head';
 
+import NavBar from 'components/NavBar';
+
 import useTranslationPrefix from 'hooks/useTranslationPrefix';
 
-import { FormContainer, Header } from './styles';
+import { Layout } from './styles';
 
 type Props = {
   title: string;
@@ -18,7 +20,10 @@ const DashboardLayout: React.FC<Props> = ({ title, children }) => {
       <Head>
         <title>{t('page_title', { title })}</title>
       </Head>
-      <FormContainer>{children}</FormContainer>
+      <Layout>
+        <NavBar />
+        {children}
+      </Layout>
     </>
   );
 };

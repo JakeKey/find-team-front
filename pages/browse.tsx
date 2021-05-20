@@ -6,14 +6,13 @@ import DashboardLayout from 'containers/DashboardLayout';
 import useTranslationPrefix from 'hooks/useTranslationPrefix';
 import useAuth from 'hooks/useAuth';
 
-const Dashboard: React.FC = () => {
+const Browse: React.FC = () => {
   useAuth();
   const t = useTranslationPrefix('Dashboard');
 
   return (
     <DashboardLayout title={t('dashboard')}>
-      <h1>You have no projects yet</h1>
-      <div>Create new project or browse existing</div>
+      <div>Browse</div>
     </DashboardLayout>
   );
 };
@@ -28,4 +27,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default Dashboard;
+export default Browse;

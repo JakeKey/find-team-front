@@ -10,7 +10,10 @@
     "PM": "Project Manager",
     "PO": "Product Owner",
     "other": "Other Position",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "create_new_project": "Create New Project",
+    "browse_projects": "Browse Projects",
+    "my_projects": "My Projects"
   },
   "Auth": {
     "username": "Username",
