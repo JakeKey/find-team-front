@@ -32,6 +32,18 @@
     "register_error": "Błąd rejestracji"
   },
   "Dashboard": {
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "no_projects_yet": "Nie jesteś przypisany do żadnego projektu",
+    "create_new_project_or_browse": "Stwórz nowy projekt lub przeglądaj istniejące"
+  },
+  "Projects": {
+    "edit": "Edytuj",
+    "author": "Autor: {{author}}",
+    "project_name": "Nazwa Projektu",
+    "positions_needed": "Wymagane Stanowiska:",
+    "description": "Opis:",
+    "description_placeholder": "Dodaj zwięzły opis projektu",
+    "create_project": "Stwórz Projekt",
+    "new_project": "Nowy Projekt"
   }
 }

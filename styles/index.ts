@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
 
 export const colors = {
   white: '#fff',
@@ -12,6 +13,8 @@ export const colors = {
 };
 
 export const GlobalStyle = createGlobalStyle`
+  ${reset};
+
   @font-face {
     font-family: WorkSans;
     src: url('/fonts/WorkSans/WorkSans.ttf') format('truetype');
@@ -23,8 +26,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    margin: 0;
-    padding: 0;
     background-color: ${colors.darkGray};
 
     font-family: WorkSans, Arial, Helvetica, sans-serif;

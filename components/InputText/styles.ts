@@ -5,21 +5,30 @@ import InputMask from 'react-input-mask';
 import { colors } from 'styles';
 
 export const Wrapper = styled.div`
-  padding: 5px 0;
+  width: 100%;
 `;
 
 const inputStyle = css`
-  width: 350px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 7px;
   color: ${colors.darkBlue};
   background-color: ${colors.lightGray};
   font-weight: bold;
   border: 2px solid ${colors.black};
   border-radius: 5px;
-  padding: 7px;
 `;
 
 export const StyledField = styled(Field)`
   ${inputStyle}
+
+  margin: auto;
+  ${({ component }) =>
+    component === 'textarea' &&
+    css`
+      font-size: 14px;
+      resize: none;
+    `}
 `;
 
 export const StyledMask = styled(InputMask)`

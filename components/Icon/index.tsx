@@ -6,8 +6,11 @@ import { IconProps } from './Icons';
 import Power from './Icons/Power';
 import Menu from './Icons/Menu';
 import Account from './Icons/Account';
+import Edit from './Icons/Edit';
+import Plus from './Icons/Plus';
+import Minus from './Icons/Minus';
 
-export type IconName = 'power' | 'menu' | 'account';
+export type IconName = 'power' | 'menu' | 'account' | 'edit' | 'plus' | 'minus';
 
 interface Props {
   type: IconName;
@@ -31,6 +34,9 @@ const Icon: React.FC<Props & Partial<IconProps>> = ({
     power: <Power {...params} {...props} />,
     menu: <Menu {...params} {...props} />,
     account: <Account {...params} {...props} />,
+    edit: <Edit {...params} {...props} />,
+    plus: <Plus {...params} {...props} />,
+    minus: <Minus {...params} {...props} />,
   }[type];
 };
 

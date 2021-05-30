@@ -7,11 +7,11 @@ import AuthLayout from 'containers/AuthLayout';
 import LoginForm, { LoginFormTypes } from 'containers/LoginForm';
 import LinkButton from 'components/LinkButton';
 
-import useTranslationPrefix from 'hooks/useTranslationPrefix';
 import { useAppDispatch, useAppSelector } from 'store';
 import { authSelectors } from 'store/selectors';
 import { loginAction } from 'store/actions';
 import useAuth from 'hooks/useAuth';
+import useTranslationPrefix from 'hooks/useTranslationPrefix';
 
 const Login: React.FC = () => {
   useAuth(true);
@@ -36,7 +36,6 @@ const Login: React.FC = () => {
 
       const isEmail = usernameOrEmail.includes('@');
 
-      console.log('here3');
       dispatch(
         loginAction({
           username: !isEmail ? usernameOrEmail : undefined,

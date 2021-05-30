@@ -80,19 +80,17 @@ export const NavButton = styled.div<{ isActive: boolean }>`
   & a {
     text-decoration: none;
     color: ${colors.lightGray};
+
+    &:hover {
+      opacity: 0.9;
+    }
   }
 
   ${({ isActive }) =>
-    !isActive
-      ? css`
-          cursor: pointer;
-          &:hover {
-            opacity: 0.9;
-          }
-        `
-      : css`
-          background-color: ${colors.darkGray};
-        `}
+    isActive &&
+    css`
+      background-color: ${colors.darkGray};
+    `}
 
   @media screen and (max-width: ${breakpoints.md.max}px) {
     padding: 25px 0;

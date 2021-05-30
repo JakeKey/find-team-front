@@ -6,4 +6,5 @@ export const Label = styled.div`
   font-weight: bold;
   text-transform: capitalize;
   font-style: italic;
+  text-align: start;
 `;

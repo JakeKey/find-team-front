@@ -29,7 +29,9 @@ const RegisterForm: React.FC<Props> = ({ handleSubmit }) => {
     email: '',
   };
 
-  const positionOptions: OptionType[] = Object.values(UserPositions).map((position) => ({
+  const positionOptions: ReadonlyArray<OptionType<UserPositions>> = Object.values(
+    UserPositions
+  ).map((position) => ({
     value: position,
     name: tg(position),
   }));

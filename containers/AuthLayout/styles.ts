@@ -3,14 +3,11 @@ import styled from 'styled-components';
 import { breakpoints, colors } from 'styles';
 
 export const FormContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  box-sizing: border-box;
   background-color: ${colors.lightBlue};
-  max-width: 400px;
+  max-width: 450px;
   margin: 50px auto 0;
-  padding: 50px;
+  padding: 80px;
   border-radius: 10px;
   @media screen and (max-width: ${breakpoints.sm.max}px) {
     margin-top: 0;
@@ -18,6 +15,8 @@ export const FormContainer = styled.div`
 `;
 
 export const Header = styled.h2`
+  text-align: center;
+  font-weight: bold;
   font-size: 26px;
   padding-bottom: 20px;
 `;

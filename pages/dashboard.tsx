@@ -12,8 +12,8 @@ const Dashboard: React.FC = () => {
 
   return (
     <DashboardLayout title={t('dashboard')}>
-      <h1>You have no projects yet</h1>
-      <div>Create new project or browse existing</div>
+      <h1>{t('no_projects_yet')}</h1>
+      <div>{t('create_new_project_or_browse')}</div>
     </DashboardLayout>
   );
 };

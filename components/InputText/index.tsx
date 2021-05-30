@@ -1,4 +1,5 @@
 import { ChangeEventHandler, memo } from 'react';
+import { FieldProps } from 'formik';
 
 import InputError from 'components/InputError';
 import InputLabel from 'components/InputLabel';
@@ -13,7 +14,8 @@ type Props = {
   type?: string;
   mask?: string;
   value?: string;
-  handleChange?: ChangeEventHandler<HTMLInputElement>;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
+  is?: 'textarea';
 };
 
 const InputText: React.FC<Props> = ({
@@ -24,7 +26,8 @@ const InputText: React.FC<Props> = ({
   placeholder,
   mask,
   value,
-  handleChange,
+  onChange,
+  is,
 }) => {
   return (
     <Wrapper>
@@ -35,9 +38,11 @@ const InputText: React.FC<Props> = ({
           mask={mask}
           value={value}
           type={type}
-          onChange={handleChange}
+          onChange={onChange}
           placeholder={placeholder}
         />
+      ) : is ? (
+        <StyledField name={name} placeholder={placeholder} component={is} rows={5} />
       ) : (
         <StyledField name={name} type={type} placeholder={placeholder} />
       )}

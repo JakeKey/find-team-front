@@ -16,7 +16,6 @@ const MENU_ROUTES = {
 const NavBar: React.FC = () => {
   const t = useTranslationPrefix('General');
   const { route } = useRouter();
-  console.log('path', route);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 

@@ -22,7 +22,7 @@
     "register": "Register",
     "log_in": "Log In",
     "email": "E-mail address",
-    "position": "Position (optional)",
+    "position_optional": "Position (optional)",
     "no_account_register": "No account? Register!",
     "already_registered": "Already registered? Login!",
     "verify_title": "E-mail address verification",
@@ -32,6 +32,18 @@
     "register_error": "Error occured during registration"
   },
   "Dashboard": {
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "no_projects_yet": "You have no projects yet",
+    "create_new_project_or_browse": "Create new project or browse existing"
+  },
+  "Projects": {
+    "edit": "Edit",
+    "author": "Author: {{author}}",
+    "project_name": "Project Name",
+    "positions_needed": "Positions Needed:",
+    "description": "Description:",
+    "description_placeholder": "Add descriptive project info",
+    "create_project": "Create Project",
+    "new_project": "New Project"
   }
 }
