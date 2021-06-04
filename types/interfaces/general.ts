@@ -12,3 +12,9 @@ export interface ResponseModel<T> {
 }
 
 export type ResponseSuccess<T> = Pick<ResponseModel<T>, 'data' | 'success'>;
+
+export interface BasicStateType {
+  isLoading: boolean;
+  error?: ErrorCodes;
+  success?: SuccessCodes;
+}

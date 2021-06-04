@@ -2,21 +2,27 @@ import { memo } from 'react';
 
 import InputText from 'components/InputText';
 
-import { ProjectType } from 'types/interfaces/project';
+import { ProjectType } from 'types/interfaces';
 
 import { StyledTitle, TitleWrapper, TitleInputContainer } from './styles';
 import useTranslationPrefix from 'hooks/useTranslationPrefix';
 
-type Props = Pick<ProjectType, 'name'> & { isEditMode: boolean };
+type Props = Pick<ProjectType, 'name'> & { isEditMode: boolean; error?: string | false };
 
-const Title: React.FC<Props> = ({ name, isEditMode }) => {
+const Title: React.FC<Props> = ({ name, isEditMode, error }) => {
   const t = useTranslationPrefix('Projects');
 
   return (
     <TitleWrapper>
       {isEditMode ? (
         <TitleInputContainer>
-          <InputText type="text" name="name" label={t('project_name')} />
+          <InputText
+            type="text"
+            name="name"
+            error={error}
+            label={t('project_name')}
+            placeholder={t('project_name')}
+          />
         </TitleInputContainer>
       ) : (
         <StyledTitle>{name}</StyledTitle>

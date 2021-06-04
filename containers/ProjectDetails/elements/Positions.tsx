@@ -5,19 +5,19 @@ import Select, { OptionType } from 'components/Select';
 
 import useTranslationPrefix from 'hooks/useTranslationPrefix';
 import { UserPositions } from 'types/enums';
-import { PositionType } from 'types/interfaces/project';
+import { PositionType } from 'types/interfaces';
 
 import { PositionsWrapper, PositionsContainer } from './styles';
 
 interface PositionsProps {
   isEditMode: boolean;
-  positions?: PositionType;
-  setPositions?: (positions: PositionType) => void;
+  positions?: PositionType[];
+  setPositions?: (positions: PositionType[]) => void;
 }
 
 const getInitialPositionsOptions = (
   tg: (key: string) => string,
-  positions?: PositionType
+  positions?: PositionType[]
 ): OptionType<UserPositions>[] => {
   const usedPositions = positions?.map(({ position }) => position);
   const filteredPositions = Object.values(UserPositions).filter(
@@ -45,7 +45,7 @@ const Positions: React.FC<PositionsProps> = ({ isEditMode, setPositions, positio
       ? positions.findIndex(({ position }) => position === positionToDecrement)
       : -1;
 
-    if (positions[positionIndex].quantity < 2) {
+    if (positions[positionIndex].count < 2) {
       setPositionOptions([
         ...positionOptions,
         { value: positionToDecrement, name: tg(positionToDecrement) },
@@ -54,7 +54,7 @@ const Positions: React.FC<PositionsProps> = ({ isEditMode, setPositions, positio
     } else {
       positionsToChange.splice(positionIndex, 1, {
         position: positionToDecrement,
-        quantity: --positionsToChange[positionIndex].quantity,
+        count: positionsToChange[positionIndex].count - 1,
       });
     }
 
@@ -70,11 +70,11 @@ const Positions: React.FC<PositionsProps> = ({ isEditMode, setPositions, positio
 
     if (positionIndex === -1) {
       setPositionOptions(positionOptions.filter(({ value }) => value !== positionToIncrement));
-      positionsToChange.push({ position: positionToIncrement, quantity: 1 });
+      positionsToChange.push({ position: positionToIncrement, count: 1 });
     } else {
       positionsToChange.splice(positionIndex, 1, {
         position: positionToIncrement,
-        quantity: ++positionsToChange[positionIndex].quantity,
+        count: positionsToChange[positionIndex].count + 1,
       });
     }
 
@@ -90,12 +90,12 @@ const Positions: React.FC<PositionsProps> = ({ isEditMode, setPositions, positio
     <PositionsWrapper>
       <PositionsContainer>
         <div>{t('positions_needed')}</div>
-        {positions?.map(({ position, quantity }) => (
+        {positions?.map(({ position, count }) => (
           <PositionField
             key={position}
             positionTranslation={tg(position)}
             position={position}
-            quantity={quantity}
+            count={count}
             onDecrement={onDecrement}
             onIncrement={onIncrement}
             isEditMode={isEditMode}

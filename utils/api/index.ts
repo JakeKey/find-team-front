@@ -1,6 +1,8 @@
 import { ResponseModel, ResponseSuccess } from 'types/interfaces';
+import { getQueryStringFromObject } from 'utils/helpers';
 
 import auth from './auth';
+import projects from './projects';
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL || '/api';
 export const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '';
@@ -10,14 +12,17 @@ type FetchMethods = 'GET' | 'POST' | 'PUT' | 'DELETE';
 export const fetchApi = async <T>(
   url: string,
   method: FetchMethods = 'GET',
-  body?: Record<string, unknown>
+  dataReq?: { body?: Record<string, unknown>; query?: Record<string, string | number> }
 ): Promise<ResponseSuccess<T>> => {
-  const response = await fetch(url, {
+  const token = global.localStorage?.getItem('token');
+
+  const response = await fetch(`${url}${getQueryStringFromObject(dataReq?.query)}`, {
     method,
-    body: JSON.stringify(body),
+    body: JSON.stringify(dataReq?.body),
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
     },
   });
 
@@ -28,4 +33,5 @@ export const fetchApi = async <T>(
 
 export default {
   auth,
+  projects,
 };

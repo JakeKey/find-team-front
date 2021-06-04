@@ -20,11 +20,11 @@ interface AuthApiHandlersTypes {
 
 const authApi: AuthApiHandlersTypes = {
   register: async (data) =>
-    fetchApi<RegisterResponseData>(`${API_URL}${ENDPOINT_PREFIX}/register`, 'POST', data),
+    fetchApi<RegisterResponseData>(`${API_URL}${ENDPOINT_PREFIX}/register`, 'POST', { body: data }),
   login: async (data) =>
-    fetchApi<LoginResponseData>(`${API_URL}${ENDPOINT_PREFIX}/login`, 'POST', data),
+    fetchApi<LoginResponseData>(`${API_URL}${ENDPOINT_PREFIX}/login`, 'POST', { body: data }),
   verify: async (data) =>
-    fetchApi<VerifyCodeResponseData>(`${API_URL}${ENDPOINT_PREFIX}/verify`, 'POST', data),
+    fetchApi<VerifyCodeResponseData>(`${API_URL}${ENDPOINT_PREFIX}/verify`, 'POST', { body: data }),
 };
 
 export default authApi;

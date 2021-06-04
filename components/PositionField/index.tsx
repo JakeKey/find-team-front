@@ -8,7 +8,7 @@ import { Wrapper, StyledSigns } from './styles';
 interface Props {
   isEditMode: boolean;
   positionTranslation: string;
-  quantity: number;
+  count: number;
   onDecrement: (position: UserPositions) => void;
   onIncrement: (position: UserPositions) => void;
 }
@@ -16,19 +16,19 @@ interface Props {
 const PositionField: React.FC<Props & Required<Pick<UserType, 'position'>>> = ({
   positionTranslation,
   position,
-  quantity,
+  count,
   onDecrement,
   onIncrement,
   isEditMode,
 }) => {
   return (
     <Wrapper>
-      <span>{positionTranslation} </span>
+      <span>{positionTranslation}</span>
       <span>
         {isEditMode && (
           <StyledSigns type="minus" color="red" onClick={() => onDecrement(position)} />
         )}
-        {quantity}
+        {count}
         {isEditMode && (
           <StyledSigns type="plus" color="green" onClick={() => onIncrement(position)} />
         )}

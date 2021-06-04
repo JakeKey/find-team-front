@@ -13,7 +13,9 @@
     "loading": "Loading...",
     "create_new_project": "Create New Project",
     "browse_projects": "Browse Projects",
-    "my_projects": "My Projects"
+    "my_projects": "My Projects",
+    "cancel": "Cancel",
+    "save": "Save"
   },
   "Auth": {
     "username": "Username",

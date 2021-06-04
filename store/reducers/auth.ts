@@ -1,11 +1,7 @@
-import { AuthActionTypes } from 'store/actions';
-import { ErrorCodes, SuccessCodes } from 'types/enums';
+import { AuthActionTypes, AUTH } from 'store/actions';
+import { BasicStateType } from 'types/interfaces';
 
-export interface AuthStateType {
-  isLoading: boolean;
-  error?: ErrorCodes;
-  success?: SuccessCodes;
-}
+export type AuthStateType = BasicStateType;
 
 export const INITIAL_STATE_AUTH: AuthStateType = {
   isLoading: false,
@@ -13,57 +9,57 @@ export const INITIAL_STATE_AUTH: AuthStateType = {
 
 export const authReducer = (state = INITIAL_STATE_AUTH, action: AuthActionTypes): AuthStateType => {
   switch (action.type) {
-    case 'REGISTER_REQUESTED':
+    case AUTH.REGISTER_REQUESTED:
       return {
         ...state,
         isLoading: true,
       };
-    case 'REGISTER_SUCCEEDED':
+    case AUTH.REGISTER_SUCCEEDED:
       return {
         ...state,
         isLoading: false,
         success: action.payload,
         error: undefined,
       };
-    case 'REGISTER_FAILED':
+    case AUTH.REGISTER_FAILED:
       return {
         ...state,
         isLoading: false,
         success: undefined,
         error: action.payload,
       };
-    case 'LOGIN_REQUESTED':
+    case AUTH.LOGIN_REQUESTED:
       return {
         ...state,
         isLoading: true,
       };
-    case 'LOGIN_SUCCEEDED':
+    case AUTH.LOGIN_SUCCEEDED:
       return {
         ...state,
         isLoading: false,
         error: undefined,
         success: action.payload,
       };
-    case 'LOGIN_FAILED':
+    case AUTH.LOGIN_FAILED:
       return {
         ...state,
         isLoading: false,
         success: undefined,
         error: action.payload,
       };
-    case 'VERIFY_REQUESTED':
+    case AUTH.VERIFY_REQUESTED:
       return {
         ...state,
         isLoading: true,
       };
-    case 'VERIFY_SUCCEEDED':
+    case AUTH.VERIFY_SUCCEEDED:
       return {
         ...state,
         isLoading: false,
         error: undefined,
         success: action.payload,
       };
-    case 'VERIFY_FAILED':
+    case AUTH.VERIFY_FAILED:
       return {
         ...state,
         isLoading: false,

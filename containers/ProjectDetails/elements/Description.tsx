@@ -10,9 +10,10 @@ interface Props {
   description?: string;
   name: string;
   isEditMode: boolean;
+  error?: string | false;
 }
 
-const Description: React.FC<Props> = ({ name, description, isEditMode }) => {
+const Description: React.FC<Props> = ({ name, description, isEditMode, error }) => {
   const t = useTranslationPrefix('Projects');
   return (
     <DescriptionWrapper>
@@ -20,7 +21,12 @@ const Description: React.FC<Props> = ({ name, description, isEditMode }) => {
       {!isEditMode ? (
         <div>{description}</div>
       ) : (
-        <InputText is="textarea" name={name} placeholder={t('description_placeholder')} />
+        <InputText
+          is="textarea"
+          name={name}
+          placeholder={t('description_placeholder')}
+          error={error}
+        />
       )}
     </DescriptionWrapper>
   );

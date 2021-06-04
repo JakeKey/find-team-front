@@ -13,7 +13,9 @@
     "loading": "Wczytywanie...",
     "create_new_project": "Stwórz Nowy Projekt",
     "browse_projects": "Przeglądaj Projekty",
-    "my_projects": "Moje Projekty"
+    "my_projects": "Moje Projekty",
+    "cancel": "Anuluj",
+    "save": "Zapisz"
   },
   "Auth": {
     "username": "Nazwa użytkownika",
