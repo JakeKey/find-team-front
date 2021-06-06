@@ -36,7 +36,8 @@
   "Dashboard": {
     "dashboard": "Dashboard",
     "no_projects_yet": "You have no projects yet",
-    "create_new_project_or_browse": "Create new project or browse existing"
+    "create_new_project_or_browse": "Create new project or browse existing",
+    "browse_projects": "Browse Projects"
   },
   "Projects": {
     "edit": "Edit",

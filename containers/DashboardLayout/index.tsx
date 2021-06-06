@@ -4,6 +4,7 @@ import Head from 'next/head';
 import NavBar from 'components/NavBar';
 
 import useTranslationPrefix from 'hooks/useTranslationPrefix';
+import { checkIfTokenExists } from 'utils/helpers';
 
 import { Layout } from './styles';
 
@@ -15,13 +16,15 @@ type Props = {
 const DashboardLayout: React.FC<Props> = ({ title, children }) => {
   const t = useTranslationPrefix('General');
 
+  const isLoggedIn = checkIfTokenExists();
+
   return (
     <>
       <Head>
         <title>{t('page_title', { title })}</title>
       </Head>
       <Layout>
-        <NavBar />
+        {isLoggedIn && <NavBar />}
         {children}
       </Layout>
     </>

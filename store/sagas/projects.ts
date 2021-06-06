@@ -7,17 +7,21 @@ import {
   GetProjectActionType,
   getProjectActionSuccess,
   getProjectActionError,
+  GetAllProjectsActionType,
+  getAllProjectsActionSuccess,
+  getAllProjectsActionError,
 } from 'store/actions';
 import { ErrorCodes, SuccessCodes } from 'types/enums';
 import {
   CreateProjectResponseData,
   ResponseSuccess,
   GetProjectResponseData,
+  GetAllProjectsResponseData,
 } from 'types/interfaces';
 import api from 'utils/api';
 
 const {
-  projects: { get, create },
+  projects: { get, create, getAll },
 } = api;
 
 export function* projectsCreate(
@@ -39,5 +43,21 @@ export function* projectsGet(
     yield put(getProjectActionSuccess(result));
   } catch (e) {
     yield put(getProjectActionError(e?.message || ErrorCodes.SOMETHING_WENT_WRONG));
+  }
+}
+
+export function* projectsGetAll(
+  action: GetAllProjectsActionType
+): Generator<StrictEffect, void, ResponseSuccess<GetAllProjectsResponseData[]>> {
+  try {
+    const result = yield call(getAll, action.payload);
+    yield put(
+      getAllProjectsActionSuccess({
+        data: { projects: result.data, page: action.payload.page },
+        success: result.success,
+      })
+    );
+  } catch (e) {
+    yield put(getAllProjectsActionError(e?.message || ErrorCodes.SOMETHING_WENT_WRONG));
   }
 }

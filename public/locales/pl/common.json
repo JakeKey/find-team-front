@@ -36,7 +36,8 @@
   "Dashboard": {
     "dashboard": "Dashboard",
     "no_projects_yet": "Nie jesteś przypisany do żadnego projektu",
-    "create_new_project_or_browse": "Stwórz nowy projekt lub przeglądaj istniejące"
+    "create_new_project_or_browse": "Stwórz nowy projekt lub przeglądaj istniejące",
+    "browse_projects": "Przeglądaj Projekty"
   },
   "Projects": {
     "edit": "Edytuj",

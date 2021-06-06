@@ -2,11 +2,12 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import { DASHBOARD_ROUTE, LOGIN_ROUTE } from 'utils/constants';
+import { checkIfTokenExists } from 'utils/helpers';
 
 const useAuth = (redirectToDashboard?: boolean, redirectToLogin?: boolean): void => {
   const { push } = useRouter();
 
-  const isLoggedIn = !!global.localStorage?.getItem('token');
+  const isLoggedIn = checkIfTokenExists();
 
   useEffect(() => {
     if ((!redirectToDashboard || redirectToLogin) && !isLoggedIn) {

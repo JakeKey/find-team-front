@@ -1,14 +1,17 @@
 import { ProjectsActionTypes, PROJECTS } from 'store/actions';
-import { BasicStateType, ProjectType } from 'types/interfaces';
+import { BasicStateType, GetAllProjectsResponseData, ProjectType } from 'types/interfaces';
+import { PROJECTS_LIST_LIMIT } from 'utils/constants';
 
 export interface ProjectsStateType extends BasicStateType {
-  projects: ProjectType[];
+  projects: GetAllProjectsResponseData[];
   projectDetails?: ProjectType;
+  hasMore: boolean;
 }
 
 export const INITIAL_STATE_PROJECTS: ProjectsStateType = {
   isLoading: false,
   projects: [],
+  hasMore: true,
 };
 
 export const projectsReducer = (
@@ -24,14 +27,14 @@ export const projectsReducer = (
     case PROJECTS.CREATE_PROJECT_SUCCEEDED:
       return {
         ...state,
-        isLoading: true,
+        isLoading: false,
         success: action.payload,
         error: undefined,
       };
     case PROJECTS.CREATE_PROJECT_FAILED:
       return {
         ...state,
-        isLoading: true,
+        isLoading: false,
         success: undefined,
         error: action.payload,
       };
@@ -43,7 +46,7 @@ export const projectsReducer = (
     case PROJECTS.GET_PROJECT_SUCCEEDED:
       return {
         ...state,
-        isLoading: true,
+        isLoading: false,
         success: action.payload.success,
         projectDetails: action.payload.data,
         error: undefined,
@@ -51,7 +54,30 @@ export const projectsReducer = (
     case PROJECTS.GET_PROJECT_FAILED:
       return {
         ...state,
+        isLoading: false,
+        success: undefined,
+        error: action.payload,
+      };
+    case PROJECTS.GET_ALL_PROJECTS_REQUESTED:
+      return {
+        ...state,
         isLoading: true,
+      };
+    case PROJECTS.GET_ALL_PROJECTS_SUCCEEDED:
+      return {
+        ...state,
+        isLoading: false,
+        success: action.payload.success,
+        projects: action.payload.data.page
+          ? [...state.projects, ...action.payload.data.projects]
+          : action.payload.data.projects,
+        error: undefined,
+        hasMore: action.payload.data.projects.length === PROJECTS_LIST_LIMIT,
+      };
+    case PROJECTS.GET_ALL_PROJECTS_FAILED:
+      return {
+        ...state,
+        isLoading: false,
         success: undefined,
         error: action.payload,
       };

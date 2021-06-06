@@ -1,3 +1,4 @@
+import { UserPositions } from 'types/enums';
 import { ResponseModel, ResponseSuccess } from 'types/interfaces';
 import { getQueryStringFromObject } from 'utils/helpers';
 
@@ -12,7 +13,10 @@ type FetchMethods = 'GET' | 'POST' | 'PUT' | 'DELETE';
 export const fetchApi = async <T>(
   url: string,
   method: FetchMethods = 'GET',
-  dataReq?: { body?: Record<string, unknown>; query?: Record<string, string | number> }
+  dataReq?: {
+    body?: Record<string, unknown>;
+    query?: Record<string, string | number | UserPositions>;
+  }
 ): Promise<ResponseSuccess<T>> => {
   const token = global.localStorage?.getItem('token');
 

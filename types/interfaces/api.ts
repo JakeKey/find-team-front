@@ -1,3 +1,4 @@
+import { UserPositions } from 'types/enums';
 import { ProjectType } from './project';
 import { UserType } from './user';
 
@@ -22,10 +23,22 @@ export type VerifyCodeResponseData = { token: string };
 
 export type CreateProjectReqBody = Pick<ProjectType, 'name' | 'description' | 'positions'>;
 
-export type GetProjectByIdQueryParams = Pick<ProjectType, 'id'>;
+export type GetProjectByIdParams = string | number;
 
 export type GetProjectResponseData = ProjectType & {
-  authorName: string;
+  authorname: string;
 };
+
+export interface GetProjectsAllQueryParams {
+  fromId?: number;
+  page: number;
+  limit: number;
+  filter?: UserPositions;
+}
+
+export type GetAllProjectsResponseData = Pick<
+  ProjectType,
+  'id' | 'name' | 'description' | 'createdAt'
+> & { authorname: string };
 
 export type CreateProjectResponseData = null;

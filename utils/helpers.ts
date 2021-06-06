@@ -6,3 +6,5 @@ export const getQueryStringFromObject = (obj?: Record<string, string | number>):
     '?'
   );
 };
+
+export const checkIfTokenExists = (): boolean => !!global.localStorage?.getItem('token');

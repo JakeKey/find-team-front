@@ -1,19 +1,19 @@
-import { GetStaticProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import DashboardLayout from 'containers/DashboardLayout';
-import ProjectsList from 'containers/ProjectsList';
 
 import useTranslationPrefix from 'hooks/useTranslationPrefix';
-import useAuth from 'hooks/useAuth';
 
-const Browse: React.FC = () => {
-  useAuth();
+const Project: React.FC = () => {
   const t = useTranslationPrefix('Dashboard');
+  const router = useRouter();
+  const { pid } = router.query;
 
   return (
     <DashboardLayout title={t('browse_projects')}>
-      <ProjectsList />
+      <div>{pid}</div>
     </DashboardLayout>
   );
 };
@@ -28,4 +28,11 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default Browse;
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: ['/project/first-post', { params: { pid: 'second-post' } }],
+    fallback: true,
+  };
+};
+
+export default Project;
