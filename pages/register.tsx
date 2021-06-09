@@ -14,7 +14,7 @@ import { authSelectors } from 'store/selectors';
 import useAuth from 'hooks/useAuth';
 
 const Register: React.FC = () => {
-  useAuth(true);
+  useAuth({ redirectToDashboard: true });
   const t = useTranslationPrefix('Auth');
   const dispatch = useAppDispatch();
   const { error, success, isLoading } = useAppSelector(authSelectors.selectAuthState);

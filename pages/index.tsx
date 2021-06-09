@@ -3,7 +3,7 @@ import Head from 'next/head';
 import useAuth from 'hooks/useAuth';
 
 const Home: React.FC = () => {
-  useAuth(true, true);
+  useAuth({ redirectToLogin: true, redirectToDashboard: true });
 
   return (
     <>

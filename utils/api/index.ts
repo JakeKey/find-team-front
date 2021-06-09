@@ -3,6 +3,7 @@ import { ResponseModel, ResponseSuccess } from 'types/interfaces';
 import { getQueryStringFromObject } from 'utils/helpers';
 
 import auth from './auth';
+import profile from './profile';
 import projects from './projects';
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL || '/api';
@@ -37,5 +38,6 @@ export const fetchApi = async <T>(
 
 export default {
   auth,
+  profile,
   projects,
 };

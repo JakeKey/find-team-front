@@ -5,8 +5,10 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import DashboardLayout from 'containers/DashboardLayout';
 
 import useTranslationPrefix from 'hooks/useTranslationPrefix';
+import useAuth from 'hooks/useAuth';
 
 const Project: React.FC = () => {
+  useAuth({});
   const t = useTranslationPrefix('Dashboard');
   const router = useRouter();
   const { pid } = router.query;

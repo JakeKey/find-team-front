@@ -1,11 +1,13 @@
-import { memo, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 import useTranslationPrefix from 'hooks/useTranslationPrefix';
+import { LOGIN_ROUTE } from 'utils/constants';
+import { checkIfTokenExists } from 'utils/helpers';
 import { colors } from 'styles';
 
 import { Navigation, NavButton, StyledIcon, MenuIcon } from './styles';
-import Link from 'next/link';
 
 const MENU_ROUTES = {
   DASHBOARD: '/dashboard',
@@ -15,12 +17,22 @@ const MENU_ROUTES = {
 
 const NavBar: React.FC = () => {
   const t = useTranslationPrefix('General');
-  const { route } = useRouter();
+  const { route, push } = useRouter();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [logout, setLogout] = useState(false);
+
+  const token = checkIfTokenExists();
+
+  useEffect(() => {
+    if (!token && logout) {
+      push(LOGIN_ROUTE);
+    }
+  }, [token, logout, push]);
 
   const handleLogout = (): void => {
-    // TODO
+    global.localStorage?.removeItem('token');
+    setLogout(true);
   };
 
   const toggleMenuState = (): void => {
@@ -41,9 +53,6 @@ const NavBar: React.FC = () => {
         </NavButton>
       </div>
       <div>
-        <Link href="/profile">
-          <StyledIcon type="account" color={colors.white} />
-        </Link>
         <StyledIcon type="power" color={colors.white} onClick={handleLogout} />
       </div>
       <MenuIcon type="menu" color={colors.white} onClick={toggleMenuState} />

@@ -14,7 +14,7 @@ import useAuth from 'hooks/useAuth';
 import useTranslationPrefix from 'hooks/useTranslationPrefix';
 
 const Login: React.FC = () => {
-  useAuth(true);
+  useAuth({ redirectToDashboard: true });
   const tg = useTranslationPrefix('General');
   const t = useTranslationPrefix('Auth');
   const dispatch = useAppDispatch();

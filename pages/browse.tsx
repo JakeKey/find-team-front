@@ -8,7 +8,7 @@ import useTranslationPrefix from 'hooks/useTranslationPrefix';
 import useAuth from 'hooks/useAuth';
 
 const Browse: React.FC = () => {
-  useAuth();
+  useAuth({ redirectToLogin: true });
   const t = useTranslationPrefix('Dashboard');
 
   return (

@@ -68,7 +68,7 @@ const ProjectDetails: React.FC<ProjectProps> = ({
           ))}
       </EditSection>
       <Title name={name} error={touched?.name && errors?.name} isEditMode={isEditMode} />
-      <Author>{t('author', { username })}</Author>
+      <Author>{t('author', { author: username })}</Author>
       <Description
         name="description"
         description={description}

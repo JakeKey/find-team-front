@@ -12,15 +12,16 @@ import useAuth from 'hooks/useAuth';
 import { PositionType, ProjectType } from 'types/interfaces';
 import { useAppDispatch, useAppSelector } from 'store';
 import { createProjectAction } from 'store/actions';
-import { projectsSelectors } from 'store/selectors';
+import { profileSelectors, projectsSelectors } from 'store/selectors';
 
 export type ProjectFormTypes = Pick<ProjectType, 'name' | 'description' | 'positions'>;
 
 const NewProject: React.FC = () => {
-  useAuth();
+  useAuth({ redirectToLogin: true });
   const t = useTranslationPrefix('Projects');
   const dispatch = useAppDispatch();
   const { error, success, isLoading } = useAppSelector(projectsSelectors.selectProjectsState);
+  const profile = useAppSelector(profileSelectors.selectProfile);
 
   useEffect(() => {
     if (error) {
@@ -70,6 +71,7 @@ const NewProject: React.FC = () => {
               submitForm={submitForm}
               setPositions={(positions: PositionType[]) => setFieldValue('positions', positions)}
               disabled={isSubmitting || !isValid || !dirty}
+              username={profile?.username || ''}
             />
           </Form>
         )}

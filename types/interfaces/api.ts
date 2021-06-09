@@ -1,4 +1,6 @@
 import { UserPositions } from 'types/enums';
+
+import { ProfileType } from './profile';
 import { ProjectType } from './project';
 import { UserType } from './user';
 
@@ -42,3 +44,5 @@ export type GetAllProjectsResponseData = Pick<
 > & { authorname: string };
 
 export type CreateProjectResponseData = null;
+
+export type GetProfileResponseData = ProfileType;
