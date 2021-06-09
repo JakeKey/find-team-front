@@ -1,11 +1,16 @@
 import { ProjectsActionTypes, PROJECTS } from 'store/actions';
-import { BasicStateType, GetAllProjectsResponseData, ProjectType } from 'types/interfaces';
+import {
+  BasicStateType,
+  GetAllProjectsResponseData,
+  GetProjectResponseData,
+} from 'types/interfaces';
 import { PROJECTS_LIST_LIMIT } from 'utils/constants';
 
 export interface ProjectsStateType extends BasicStateType {
   projects: GetAllProjectsResponseData[];
-  projectDetails?: ProjectType;
+  projectDetails?: GetProjectResponseData;
   hasMore: boolean;
+  createdProjectId?: number;
 }
 
 export const INITIAL_STATE_PROJECTS: ProjectsStateType = {
@@ -28,7 +33,8 @@ export const projectsReducer = (
       return {
         ...state,
         isLoading: false,
-        success: action.payload,
+        success: action.payload.success,
+        createdProjectId: action.payload.data?.id,
         error: undefined,
       };
     case PROJECTS.CREATE_PROJECT_FAILED:

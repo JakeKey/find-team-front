@@ -4,8 +4,7 @@ import { FormikErrors, FormikState, FormikTouched } from 'formik';
 import Button from 'components/Button';
 
 import useTranslationPrefix from 'hooks/useTranslationPrefix';
-import { PositionType, ProjectType } from 'types/interfaces';
-import { ProjectFormTypes } from 'pages/new-project';
+import { PositionType, ProjectFormTypes, ProjectType } from 'types/interfaces';
 
 import Title from './elements/Title';
 import Description from './elements/Description';
@@ -31,7 +30,7 @@ const ProjectDetails: React.FC<ProjectProps> = ({
   submitForm,
   values,
   setPositions,
-  isNewProject,
+  isNewProject = false,
   username,
   disabled,
   errors,
@@ -39,7 +38,7 @@ const ProjectDetails: React.FC<ProjectProps> = ({
 }) => {
   const t = useTranslationPrefix('Projects');
   const tg = useTranslationPrefix('General');
-  const [isEditMode, setIsEditMode] = useState(!!isNewProject);
+  const [isEditMode, setIsEditMode] = useState(isNewProject);
   const { name, description, positions } = values;
 
   const cancelEdit = (): void => {

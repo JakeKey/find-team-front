@@ -6,11 +6,12 @@ import { Wrapper } from './styles';
 type Props = {
   href: string;
   text: string;
+  center?: boolean;
 };
 
-const LinkButton: React.FC<Props> = ({ href, text }) => {
+const LinkButton: React.FC<Props> = ({ href, text, center }) => {
   return (
-    <Wrapper>
+    <Wrapper center={center}>
       <Link href={href}>{text}</Link>
     </Wrapper>
   );

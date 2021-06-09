@@ -43,6 +43,6 @@ export type GetAllProjectsResponseData = Pick<
   'id' | 'name' | 'description' | 'createdAt'
 > & { authorname: string };
 
-export type CreateProjectResponseData = null;
+export type CreateProjectResponseData = { id: number };
 
 export type GetProfileResponseData = ProfileType;

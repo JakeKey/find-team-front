@@ -1,5 +1,7 @@
 import { ErrorCodes, SuccessCodes } from 'types/enums';
 
+import { ProjectType } from './project';
+
 export interface Action<T, K> {
   type: T;
   payload?: K;
@@ -18,3 +20,5 @@ export interface BasicStateType {
   error?: ErrorCodes;
   success?: SuccessCodes;
 }
+
+export type ProjectFormTypes = Pick<ProjectType, 'name' | 'description' | 'positions'>;

@@ -1,27 +1,34 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Form, Formik } from 'formik';
 
 import DashboardLayout from 'containers/DashboardLayout';
 import ProjectDetails from 'containers/ProjectDetails';
 
-import { validateCreateProject } from 'utils/validation/projects';
+import { validateCreateProject } from 'utils/validation';
+import { PROJECT_ROUTE } from 'utils/constants';
 import useTranslationPrefix from 'hooks/useTranslationPrefix';
 import useAuth from 'hooks/useAuth';
-import { PositionType, ProjectType } from 'types/interfaces';
+import { PositionType, ProjectFormTypes } from 'types/interfaces';
 import { useAppDispatch, useAppSelector } from 'store';
 import { createProjectAction } from 'store/actions';
 import { profileSelectors, projectsSelectors } from 'store/selectors';
 
-export type ProjectFormTypes = Pick<ProjectType, 'name' | 'description' | 'positions'>;
-
 const NewProject: React.FC = () => {
   useAuth({ redirectToLogin: true });
+
   const t = useTranslationPrefix('Projects');
+
+  const { push } = useRouter();
+
   const dispatch = useAppDispatch();
-  const { error, success, isLoading } = useAppSelector(projectsSelectors.selectProjectsState);
+  const { error, isLoading, createdProjectId } = useAppSelector(
+    projectsSelectors.selectProjectsState
+  );
   const profile = useAppSelector(profileSelectors.selectProfile);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   useEffect(() => {
     if (error) {
@@ -29,10 +36,17 @@ const NewProject: React.FC = () => {
     }
   }, [error]);
 
+  useEffect(() => {
+    if (isFormSubmitted && createdProjectId) {
+      push(`${PROJECT_ROUTE}/${createdProjectId}`);
+    }
+  }, [isFormSubmitted, createdProjectId, push]);
+
   const handleSubmit = useCallback(
     (values: ProjectFormTypes): void => {
       if (isLoading) return;
       dispatch(createProjectAction(values));
+      setIsFormSubmitted(true);
     },
     [dispatch, isLoading]
   );

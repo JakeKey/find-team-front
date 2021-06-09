@@ -2,14 +2,17 @@ import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
 export const colors = {
-  white: '#fff',
-  black: '#1B1212',
-  lightGray: '#D3D3D3',
-  darkGray: '#A9A9A9',
   lightBlue: '#40E0D0',
-  darkBlue: '#00008B',
   darkRed: '#8B0000',
   lightRed: '#FF0000',
+
+  white: '#fff',
+  black: '#000',
+  blue: '#003566',
+  darkBlue: '#001D3D',
+  lightGray: '#CFD3D7',
+  gray: '#212529',
+  darkGray: '#495057',
 };
 
 export const GlobalStyle = createGlobalStyle`
@@ -26,7 +29,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: ${colors.darkGray};
+    background-color: ${colors.blue};
+    color: ${colors.lightGray};
 
     font-family: WorkSans, Arial, Helvetica, sans-serif;
   }

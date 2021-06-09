@@ -1,12 +1,13 @@
-import { ErrorCodes, SuccessCodes } from 'types/enums';
+import { ErrorCodes } from 'types/enums';
 import {
   Action,
   CreateProjectReqBody,
   GetAllProjectsResponseData,
   GetProjectByIdParams,
   GetProjectsAllQueryParams,
-  ProjectType,
+  GetProjectResponseData,
   ResponseSuccess,
+  CreateProjectResponseData,
 } from 'types/interfaces';
 
 export enum PROJECTS {
@@ -36,7 +37,7 @@ export type CreateProjectActionType = Required<
   Action<PROJECTS.CREATE_PROJECT_REQUESTED, CreateProjectReqBody>
 >;
 export type CreateProjectActionSuccessType = Required<
-  Action<PROJECTS.CREATE_PROJECT_SUCCEEDED, SuccessCodes>
+  Action<PROJECTS.CREATE_PROJECT_SUCCEEDED, ResponseSuccess<CreateProjectResponseData>>
 >;
 export type CreateProjectActionErrorType = Required<
   Action<PROJECTS.CREATE_PROJECT_FAILED, ErrorCodes>
@@ -50,7 +51,7 @@ export const createProjectAction = (payload: CreateProjectReqBody): CreateProjec
 };
 
 export const createProjectActionSuccess = (
-  payload: SuccessCodes
+  payload: ResponseSuccess<CreateProjectResponseData>
 ): CreateProjectActionSuccessType => {
   return {
     type: PROJECTS.CREATE_PROJECT_SUCCEEDED,
@@ -69,7 +70,7 @@ export type GetProjectActionType = Required<
   Action<PROJECTS.GET_PROJECT_REQUESTED, GetProjectByIdParams>
 >;
 export type GetProjectActionSuccessType = Required<
-  Action<PROJECTS.GET_PROJECT_SUCCEEDED, ResponseSuccess<ProjectType>>
+  Action<PROJECTS.GET_PROJECT_SUCCEEDED, ResponseSuccess<GetProjectResponseData>>
 >;
 export type GetProjectActionErrorType = Required<Action<PROJECTS.GET_PROJECT_FAILED, ErrorCodes>>;
 
@@ -81,7 +82,7 @@ export const getProjectAction = (payload: GetProjectByIdParams): GetProjectActio
 };
 
 export const getProjectActionSuccess = (
-  payload: ResponseSuccess<ProjectType>
+  payload: ResponseSuccess<GetProjectResponseData>
 ): GetProjectActionSuccessType => {
   return {
     type: PROJECTS.GET_PROJECT_SUCCEEDED,

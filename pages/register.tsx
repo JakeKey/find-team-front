@@ -53,7 +53,7 @@ const Register: React.FC = () => {
       ) : (
         <>
           <RegisterForm handleSubmit={handleSubmit} />
-          <LinkButton text={t('already_registered')} href="/login" />
+          <LinkButton text={t('already_registered')} href="/login" center />
         </>
       )}
     </AuthLayout>

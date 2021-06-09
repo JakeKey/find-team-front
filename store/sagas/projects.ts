@@ -11,7 +11,7 @@ import {
   getAllProjectsActionSuccess,
   getAllProjectsActionError,
 } from 'store/actions';
-import { ErrorCodes, SuccessCodes } from 'types/enums';
+import { ErrorCodes } from 'types/enums';
 import {
   CreateProjectResponseData,
   ResponseSuccess,
@@ -29,7 +29,7 @@ export function* projectsCreate(
 ): Generator<StrictEffect, void, ResponseSuccess<CreateProjectResponseData>> {
   try {
     const result = yield call(create, action.payload);
-    yield put(createProjectActionSuccess(result?.success || SuccessCodes.SUCCESS));
+    yield put(createProjectActionSuccess(result));
   } catch (e) {
     yield put(createProjectActionError(e?.message || ErrorCodes.SOMETHING_WENT_WRONG));
   }

@@ -4,7 +4,7 @@ import { breakpoints, colors } from 'styles';
 
 export const FormContainer = styled.div`
   box-sizing: border-box;
-  background-color: ${colors.lightBlue};
+  background-color: ${colors.lightGray};
   max-width: 450px;
   margin: 50px auto 0;
   padding: 80px;
@@ -19,4 +19,5 @@ export const Header = styled.h2`
   font-weight: bold;
   font-size: 26px;
   padding-bottom: 20px;
+  color: ${colors.black};
 `;

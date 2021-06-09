@@ -15,10 +15,9 @@ import useTranslationPrefix from 'hooks/useTranslationPrefix';
 
 const Login: React.FC = () => {
   useAuth({ redirectToDashboard: true });
-  const tg = useTranslationPrefix('General');
   const t = useTranslationPrefix('Auth');
   const dispatch = useAppDispatch();
-  const { error, success, isLoading } = useAppSelector(authSelectors.selectAuthState);
+  const { error, isLoading } = useAppSelector(authSelectors.selectAuthState);
 
   const { executeRecaptcha } = useGoogleReCaptcha();
 
@@ -51,7 +50,7 @@ const Login: React.FC = () => {
   return (
     <AuthLayout title={t('log_in')}>
       <LoginForm handleSubmit={handleSubmit} />
-      <LinkButton text={t('no_account_register')} href="/register" />
+      <LinkButton text={t('no_account_register')} href="/register" center />
     </AuthLayout>
   );
 };
