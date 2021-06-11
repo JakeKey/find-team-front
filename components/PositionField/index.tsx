@@ -30,7 +30,12 @@ const PositionField: React.FC<Props & Required<Pick<UserType, 'position'>>> = ({
         )}
         {count}
         {isEditMode && (
-          <StyledSigns type="plus" color="green" onClick={() => onIncrement(position)} />
+          <StyledSigns
+            type="plus"
+            color="green"
+            onClick={() => onIncrement(position)}
+            height={'15px'}
+          />
         )}
       </span>
     </Wrapper>

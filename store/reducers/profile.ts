@@ -34,6 +34,17 @@ export const profileReducer = (
         error: action.payload,
         success: undefined,
       };
+    case PROFILE.UNSET_PROFILE_STATES_REQUESTED:
+      return {
+        ...state,
+      };
+    case PROFILE.UNSET_PROFILE_STATES_DONE:
+      return {
+        ...state,
+        isLoading: false,
+        success: undefined,
+        error: undefined,
+      };
     default:
       return state;
   }

@@ -8,6 +8,7 @@ import { UserPositions } from 'types/enums';
 import { PositionType } from 'types/interfaces';
 
 import { PositionsWrapper, PositionsContainer } from './styles';
+import InputLabel from 'components/InputLabel';
 
 interface PositionsProps {
   isEditMode: boolean;
@@ -89,7 +90,7 @@ const Positions: React.FC<PositionsProps> = ({ isEditMode, setPositions, positio
   return (
     <PositionsWrapper>
       <PositionsContainer>
-        <div>{t('positions_needed')}</div>
+        <InputLabel label={t('positions_needed')} />
         {positions?.map(({ position, count }) => (
           <PositionField
             key={position}

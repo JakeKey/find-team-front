@@ -2,7 +2,7 @@ import Head from 'next/head';
 
 import useAuth from 'hooks/useAuth';
 
-const Home: React.FC = () => {
+const Index: React.FC = () => {
   useAuth({ redirectToLogin: true, redirectToDashboard: true });
 
   return (
@@ -14,4 +14,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Index;

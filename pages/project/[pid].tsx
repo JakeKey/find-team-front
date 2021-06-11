@@ -6,23 +6,23 @@ import { Formik } from 'formik';
 
 import DashboardLayout from 'containers/DashboardLayout';
 import ProjectDetails from 'containers/ProjectDetails';
-
-import useTranslationPrefix from 'hooks/useTranslationPrefix';
-import useAuth from 'hooks/useAuth';
-import { useAppDispatch, useAppSelector } from 'store';
-import { projectsSelectors } from 'store/selectors';
-import { getProjectAction } from 'store/actions';
-import { ProjectFormTypes } from 'types/interfaces';
 import Loader from 'components/Loader';
 
+import useAuth from 'hooks/useAuth';
+import useToastCustom from 'hooks/useToastCustom';
+import useTranslationPrefix from 'hooks/useTranslationPrefix';
+import { useAppDispatch, useAppSelector } from 'store';
+import { projectsSelectors } from 'store/selectors';
+import { getProjectAction, unsetProjectsStatesAction } from 'store/actions';
+import { ProjectFormTypes } from 'types/interfaces';
+
 const Project: React.FC = () => {
-  useAuth({});
-
+  useAuth({ redirectToLogin: true });
   const t = useTranslationPrefix('Dashboard');
-
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector(projectsSelectors.selectProjectsState);
+  const { isLoading, error, success } = useAppSelector(projectsSelectors.selectProjectsState);
   const project = useAppSelector(projectsSelectors.selectProjectDetails);
+  useToastCustom({ unsetAction: unsetProjectsStatesAction, error, success });
 
   const { query, push } = useRouter();
   const { pid } = query;
@@ -31,7 +31,6 @@ const Project: React.FC = () => {
 
   useEffect(() => {
     if (!pid) {
-      push('/');
       return;
     }
     if (!isProperProjectLoaded) {
@@ -77,7 +76,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: ['/project/first-post', { params: { pid: 'second-post' } }],
+    paths: [],
     fallback: true,
   };
 };

@@ -1,11 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const colors = {
-  lightBlue: '#40E0D0',
   darkRed: '#8B0000',
-  lightRed: '#FF0000',
-
+  orange: '#FB8500',
   white: '#fff',
   black: '#000',
   blue: '#003566',
@@ -33,6 +32,10 @@ export const GlobalStyle = createGlobalStyle`
     color: ${colors.lightGray};
 
     font-family: WorkSans, Arial, Helvetica, sans-serif;
+  }
+
+  .grecaptcha-badge { 
+    visibility: hidden;
   }
 `;
 

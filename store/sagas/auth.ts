@@ -7,6 +7,7 @@ import {
   registerActionError,
   registerActionSuccess,
   RegisterActionType,
+  unsetAuthStatesActionDone,
   VerifyActionType,
 } from 'store/actions';
 import { ErrorCodes, SuccessCodes } from 'types/enums';
@@ -59,4 +60,8 @@ export function* authVerify(
   } catch (e) {
     yield put(loginActionError(e?.message || ErrorCodes.SOMETHING_WENT_WRONG));
   }
+}
+
+export function* authUnsetStates(): Generator {
+  yield put(unsetAuthStatesActionDone());
 }

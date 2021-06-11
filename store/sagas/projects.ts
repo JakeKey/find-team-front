@@ -10,6 +10,7 @@ import {
   GetAllProjectsActionType,
   getAllProjectsActionSuccess,
   getAllProjectsActionError,
+  unsetProjectsStatesActionDone,
 } from 'store/actions';
 import { ErrorCodes } from 'types/enums';
 import {
@@ -60,4 +61,8 @@ export function* projectsGetAll(
   } catch (e) {
     yield put(getAllProjectsActionError(e?.message || ErrorCodes.SOMETHING_WENT_WRONG));
   }
+}
+
+export function* projectsUnsetStates(): Generator {
+  yield put(unsetProjectsStatesActionDone());
 }

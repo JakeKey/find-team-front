@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
+import useToastCustom from 'hooks/useToastCustom';
 import { DASHBOARD_ROUTE, LOGIN_ROUTE } from 'utils/constants';
 import { checkIfTokenExists } from 'utils/helpers';
 import { useAppDispatch, useAppSelector } from 'store';
 import { profileSelectors } from 'store/selectors';
-import { getProfileAction } from 'store/actions';
+import { getProfileAction, unsetProfileStatesAction } from 'store/actions';
 
 const useAuth = ({
   redirectToDashboard = false,
@@ -17,7 +18,8 @@ const useAuth = ({
   const { push } = useRouter();
 
   const dispatch = useAppDispatch();
-  const profile = useAppSelector(profileSelectors.selectProfile);
+  const { profile, error, success } = useAppSelector(profileSelectors.selectProfileState);
+  useToastCustom({ unsetAction: unsetProfileStatesAction, error, success });
 
   const token = checkIfTokenExists();
   const isLoggedIn = !!profile && token;

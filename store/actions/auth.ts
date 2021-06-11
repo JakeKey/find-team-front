@@ -11,6 +11,8 @@ export enum AUTH {
   VERIFY_REQUESTED = 'VERIFY_REQUESTED',
   VERIFY_SUCCEEDED = 'VERIFY_SUCCEEDED',
   VERIFY_FAILED = 'VERIFY_FAILED',
+  UNSET_AUTH_STATES_REQUESTED = 'UNSET_AUTH_STATES_REQUESTED',
+  UNSET_AUTH_STATES_DONE = 'UNSET_AUTH_STATES_DONE',
 }
 
 export type AuthActionTypes =
@@ -22,7 +24,9 @@ export type AuthActionTypes =
   | LoginActionErrorType
   | VerifyActionType
   | VerifyActionSuccessType
-  | VerifyActionErrorType;
+  | VerifyActionErrorType
+  | UnsetAuthStatesActionType
+  | UnsetAuthStatesActionDoneType;
 
 export type RegisterActionType = Required<Action<AUTH.REGISTER_REQUESTED, RegisterReqBody>>;
 export type RegisterActionSuccessType = Required<Action<AUTH.REGISTER_SUCCEEDED, SuccessCodes>>;
@@ -96,5 +100,20 @@ export const verifyActionError = (payload: ErrorCodes): VerifyActionErrorType =>
   return {
     type: AUTH.VERIFY_FAILED,
     payload,
+  };
+};
+
+export type UnsetAuthStatesActionType = Action<AUTH.UNSET_AUTH_STATES_REQUESTED, undefined>;
+export type UnsetAuthStatesActionDoneType = Action<AUTH.UNSET_AUTH_STATES_DONE, undefined>;
+
+export const unsetAuthStatesAction = (): UnsetAuthStatesActionType => {
+  return {
+    type: AUTH.UNSET_AUTH_STATES_REQUESTED,
+  };
+};
+
+export const unsetAuthStatesActionDone = (): UnsetAuthStatesActionDoneType => {
+  return {
+    type: AUTH.UNSET_AUTH_STATES_DONE,
   };
 };

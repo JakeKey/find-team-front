@@ -32,7 +32,7 @@ const Select: React.FC<Props> = ({
 }) => {
   return (
     <Wrapper>
-      <InputLabel label={label} />
+      <InputLabel dark label={label} />
       {asField ? (
         <StyledSelectField component="select" name={name}>
           <option value="">{placeholder}</option>

@@ -20,6 +20,8 @@ export enum PROJECTS {
   GET_ALL_PROJECTS_REQUESTED = 'GET_ALL_PROJECTS_REQUESTED',
   GET_ALL_PROJECTS_SUCCEEDED = 'GET_ALL_PROJECTS_SUCCEEDED',
   GET_ALL_PROJECTS_FAILED = 'GET_ALL_PROJECTS_FAILED',
+  UNSET_PROJECTS_STATES_REQUESTED = 'UNSET_PROJECTS_STATES_REQUESTED',
+  UNSET_PROJECTS_STATES_DONE = 'UNSET_PROJECTS_STATES_DONE',
 }
 
 export type ProjectsActionTypes =
@@ -31,7 +33,9 @@ export type ProjectsActionTypes =
   | GetProjectActionErrorType
   | GetAllProjectsActionType
   | GetAllProjectsActionSuccessType
-  | GetAllProjectsActionErrorType;
+  | GetAllProjectsActionErrorType
+  | UnsetProjectsStatesActionType
+  | UnsetProjectsStatesActionDoneType;
 
 export type CreateProjectActionType = Required<
   Action<PROJECTS.CREATE_PROJECT_REQUESTED, CreateProjectReqBody>
@@ -137,5 +141,26 @@ export const getAllProjectsActionError = (payload: ErrorCodes): GetAllProjectsAc
   return {
     type: PROJECTS.GET_ALL_PROJECTS_FAILED,
     payload,
+  };
+};
+
+export type UnsetProjectsStatesActionType = Action<
+  PROJECTS.UNSET_PROJECTS_STATES_REQUESTED,
+  undefined
+>;
+export type UnsetProjectsStatesActionDoneType = Action<
+  PROJECTS.UNSET_PROJECTS_STATES_DONE,
+  undefined
+>;
+
+export const unsetProjectsStatesAction = (): UnsetProjectsStatesActionType => {
+  return {
+    type: PROJECTS.UNSET_PROJECTS_STATES_REQUESTED,
+  };
+};
+
+export const unsetProjectsStatesActionDone = (): UnsetProjectsStatesActionDoneType => {
+  return {
+    type: PROJECTS.UNSET_PROJECTS_STATES_DONE,
   };
 };

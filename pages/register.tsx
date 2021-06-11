@@ -1,37 +1,41 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useState } from 'react';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import { toast } from 'react-toastify';
 
 import AuthLayout from 'containers/AuthLayout';
 import RegisterForm, { RegisterFormTypes } from 'containers/RegisterForm';
 import LinkButton from 'components/LinkButton';
 
+import useAuth from 'hooks/useAuth';
+import useToastCustom from 'hooks/useToastCustom';
 import useTranslationPrefix from 'hooks/useTranslationPrefix';
 import { useAppDispatch, useAppSelector } from 'store';
-import { registerAction } from 'store/actions';
+import { registerAction, unsetAuthStatesAction } from 'store/actions';
 import { authSelectors } from 'store/selectors';
-import useAuth from 'hooks/useAuth';
+import { ErrorCodes } from 'types/enums';
 
 const Register: React.FC = () => {
   useAuth({ redirectToDashboard: true });
   const t = useTranslationPrefix('Auth');
+  const tc = useTranslationPrefix('Codes');
   const dispatch = useAppDispatch();
   const { error, success, isLoading } = useAppSelector(authSelectors.selectAuthState);
-
+  const [callRequested, setCallRequested] = useState(false);
   const { executeRecaptcha } = useGoogleReCaptcha();
-
-  useEffect(() => {
-    if (error) {
-      // TODO display error toast
-    }
-  }, [error]);
+  useToastCustom({ unsetAction: unsetAuthStatesAction, error, success });
 
   const handleSubmit = useCallback(
     async (values: RegisterFormTypes): Promise<void> => {
-      if (!executeRecaptcha || isLoading) return; // TODO handle error
+      if (!executeRecaptcha || isLoading) {
+        toast.error(tc(ErrorCodes.SOMETHING_WENT_WRONG));
+        return;
+      }
       const { username, password, email, position } = values;
       const token = await executeRecaptcha('register');
+
+      setCallRequested(true);
 
       dispatch(
         registerAction({
@@ -43,12 +47,12 @@ const Register: React.FC = () => {
         })
       );
     },
-    [executeRecaptcha, dispatch, isLoading]
+    [executeRecaptcha, dispatch, isLoading, tc]
   );
 
   return (
     <AuthLayout title={t('register')}>
-      {success ? (
+      {callRequested && success ? (
         <div>{t('register_success')}</div>
       ) : (
         <>

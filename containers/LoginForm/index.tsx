@@ -30,7 +30,7 @@ const LoginForm: React.FC<Props> = ({ handleSubmit }) => {
       {({ errors, isSubmitting, isValid, dirty, touched }) => (
         <Form>
           <InputText
-            label={t('username')}
+            label={t('username_or_email')}
             name="usernameOrEmail"
             type="text"
             placeholder={t('username')}

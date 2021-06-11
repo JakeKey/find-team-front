@@ -5,6 +5,7 @@ import InputText from 'components/InputText';
 import useTranslationPrefix from 'hooks/useTranslationPrefix';
 
 import { DescriptionWrapper } from './styles';
+import InputLabel from 'components/InputLabel';
 
 interface Props {
   description?: string;
@@ -17,7 +18,7 @@ const Description: React.FC<Props> = ({ name, description, isEditMode, error }) 
   const t = useTranslationPrefix('Projects');
   return (
     <DescriptionWrapper>
-      <div>{t('description')}</div>
+      <InputLabel label={t('description')} />
       {!isEditMode ? (
         <div>{description}</div>
       ) : (

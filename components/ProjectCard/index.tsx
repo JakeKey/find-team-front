@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { GetAllProjectsResponseData } from 'types/interfaces';
 import useTranslationPrefix from 'hooks/useTranslationPrefix';
 
-import { Wrapper, ProjectName } from './styles';
+import { Wrapper, ProjectName, Author } from './styles';
 
 const ProjectCard: React.FC<GetAllProjectsResponseData> = ({
   name,
@@ -22,7 +22,7 @@ const ProjectCard: React.FC<GetAllProjectsResponseData> = ({
   return (
     <Wrapper onClick={() => goToProject()}>
       <ProjectName>{name}</ProjectName>
-      <div style={{ textAlign: 'end' }}>{t('author', { author: authorname })}</div>
+      <Author>{t('author', { author: authorname })}</Author>
       <div>{description}</div>
     </Wrapper>
   );

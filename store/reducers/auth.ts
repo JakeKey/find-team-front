@@ -66,6 +66,17 @@ export const authReducer = (state = INITIAL_STATE_AUTH, action: AuthActionTypes)
         success: undefined,
         error: action.payload,
       };
+    case AUTH.UNSET_AUTH_STATES_REQUESTED:
+      return {
+        ...state,
+      };
+    case AUTH.UNSET_AUTH_STATES_DONE:
+      return {
+        ...state,
+        isLoading: false,
+        success: undefined,
+        error: undefined,
+      };
     default:
       return state;
   }

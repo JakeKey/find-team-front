@@ -3,9 +3,9 @@ import { memo } from 'react';
 import InputText from 'components/InputText';
 
 import { ProjectType } from 'types/interfaces';
+import useTranslationPrefix from 'hooks/useTranslationPrefix';
 
 import { StyledTitle, TitleWrapper, TitleInputContainer } from './styles';
-import useTranslationPrefix from 'hooks/useTranslationPrefix';
 
 type Props = Pick<ProjectType, 'name'> & { isEditMode: boolean; error?: string | false };
 
@@ -22,6 +22,7 @@ const Title: React.FC<Props> = ({ name, isEditMode, error }) => {
             error={error}
             label={t('project_name')}
             placeholder={t('project_name')}
+            darkLabel={false}
           />
         </TitleInputContainer>
       ) : (

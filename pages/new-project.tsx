@@ -9,32 +9,26 @@ import ProjectDetails from 'containers/ProjectDetails';
 
 import { validateCreateProject } from 'utils/validation';
 import { PROJECT_ROUTE } from 'utils/constants';
-import useTranslationPrefix from 'hooks/useTranslationPrefix';
 import useAuth from 'hooks/useAuth';
+import useToastCustom from 'hooks/useToastCustom';
+import useTranslationPrefix from 'hooks/useTranslationPrefix';
 import { PositionType, ProjectFormTypes } from 'types/interfaces';
 import { useAppDispatch, useAppSelector } from 'store';
-import { createProjectAction } from 'store/actions';
+import { createProjectAction, unsetProjectsStatesAction } from 'store/actions';
 import { profileSelectors, projectsSelectors } from 'store/selectors';
 
 const NewProject: React.FC = () => {
   useAuth({ redirectToLogin: true });
-
   const t = useTranslationPrefix('Projects');
-
   const { push } = useRouter();
-
   const dispatch = useAppDispatch();
-  const { error, isLoading, createdProjectId } = useAppSelector(
+  const { error, success, isLoading, createdProjectId } = useAppSelector(
     projectsSelectors.selectProjectsState
   );
   const profile = useAppSelector(profileSelectors.selectProfile);
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  useToastCustom({ unsetAction: unsetProjectsStatesAction, error, success });
 
-  useEffect(() => {
-    if (error) {
-      // TODO display error toast
-    }
-  }, [error]);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   useEffect(() => {
     if (isFormSubmitted && createdProjectId) {

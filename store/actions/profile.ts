@@ -5,12 +5,16 @@ export enum PROFILE {
   GET_PROFILE_REQUESTED = 'GET_PROFILE_REQUESTED',
   GET_PROFILE_SUCCEEDED = 'GET_PROFILE_SUCCEEDED',
   GET_PROFILE_FAILED = 'GET_PROFILE_FAILED',
+  UNSET_PROFILE_STATES_REQUESTED = 'UNSET_PROFILE_STATES_REQUESTED',
+  UNSET_PROFILE_STATES_DONE = 'UNSET_PROFILE_STATES_DONE',
 }
 
 export type ProfileActionTypes =
   | GetProfileActionType
   | GetProfileActionSuccessType
-  | GetProfileActionErrorType;
+  | GetProfileActionErrorType
+  | UnsetProfileStatesActionType
+  | UnsetProfileStatesActionDoneType;
 
 export type GetProfileActionType = Action<PROFILE.GET_PROFILE_REQUESTED, undefined>;
 export type GetProfileActionSuccessType = Required<
@@ -37,5 +41,23 @@ export const getProfileActionError = (payload: ErrorCodes): GetProfileActionErro
   return {
     type: PROFILE.GET_PROFILE_FAILED,
     payload,
+  };
+};
+
+export type UnsetProfileStatesActionType = Action<
+  PROFILE.UNSET_PROFILE_STATES_REQUESTED,
+  undefined
+>;
+export type UnsetProfileStatesActionDoneType = Action<PROFILE.UNSET_PROFILE_STATES_DONE, undefined>;
+
+export const unsetProfileStatesAction = (): UnsetProfileStatesActionType => {
+  return {
+    type: PROFILE.UNSET_PROFILE_STATES_REQUESTED,
+  };
+};
+
+export const unsetProfileStatesActionDone = (): UnsetProfileStatesActionDoneType => {
+  return {
+    type: PROFILE.UNSET_PROFILE_STATES_DONE,
   };
 };

@@ -4,22 +4,21 @@ import InfiniteScroll from 'react-infinite-scroller';
 import ProjectCard from 'components/ProjectCard';
 import Loader from 'components/Loader';
 
+import useToastCustom from 'hooks/useToastCustom';
 import { useAppDispatch, useAppSelector } from 'store';
-import { getAllProjectsAction } from 'store/actions';
+import { getAllProjectsAction, unsetProjectsStatesAction } from 'store/actions';
 import { projectsSelectors } from 'store/selectors';
 import { PROJECTS_LIST_LIMIT } from 'utils/constants';
 
 import { Wrapper, ScrollContent } from './styles';
 
-interface Props {
-  projects?: [];
-}
-
-const ProjectsList: React.FC<Props> = () => {
+const ProjectsList: React.FC = () => {
   const PAGE_START = -1;
-  const projectsList = useAppSelector(projectsSelectors.selectProjectsList);
-  const { hasMore, isLoading, error } = useAppSelector(projectsSelectors.selectProjectsState);
+  const { hasMore, isLoading, error, success, projects } = useAppSelector(
+    projectsSelectors.selectProjectsState
+  );
   const dispatch = useAppDispatch();
+  useToastCustom({ unsetAction: unsetProjectsStatesAction, error, success, showSuccess: false });
 
   const scrollParentRef = useRef(null);
 
@@ -41,7 +40,7 @@ const ProjectsList: React.FC<Props> = () => {
         loader={<Loader key={0} />}
       >
         <ScrollContent>
-          {projectsList.map((project) => (
+          {projects.map((project) => (
             <ProjectCard key={project.id} {...project} />
           ))}
         </ScrollContent>

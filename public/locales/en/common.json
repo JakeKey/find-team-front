@@ -7,6 +7,7 @@
     "backend": "Backend Developer",
     "fullstack": "Fullstack Developer",
     "designer": "UI/UX designer",
+    "devops": "DevOps",
     "PM": "Project Manager",
     "PO": "Product Owner",
     "other": "Other Position",
@@ -20,6 +21,7 @@
   "Auth": {
     "username": "Username",
     "password": "Password",
+    "username_or_email": "Username or email",
     "retype_password": "Re-type password",
     "register": "Register",
     "log_in": "Log In",
@@ -36,17 +38,43 @@
   "Dashboard": {
     "dashboard": "Dashboard",
     "no_projects_yet": "You have no projects yet",
-    "create_new_project_or_browse": "Create new project or browse existing",
+    "create_new_project_or_browse": "Create new project or browse existing\n(demo only)",
     "browse_projects": "Browse Projects"
   },
   "Projects": {
     "edit": "Edit",
     "author": "Author: {{author}}",
     "project_name": "Project Name",
-    "positions_needed": "Positions Needed:",
-    "description": "Description:",
+    "positions_needed": "Positions Needed",
+    "description": "Description",
     "description_placeholder": "Add descriptive project info",
     "create_project": "Create Project",
     "new_project": "New Project"
+  },
+  "Codes": {
+    "SOMETHING_WENT_WRONG": "Something went wrong",
+    "USERNAME_ALREADY_TAKEN": "Username already used",
+    "EMAIL_ALREADY_REGISTERED": "Email address already registered",
+    "VALIDATION_ERROR": "Validation error",
+    "INVALID_CAPTCHA": "Invalid captcha, refresh the page",
+    "MISSING_CREDENTIALS": "Missing credentials",
+    "INVALID_CREDENTIALS": "Invalid credentials",
+    "INVALID_VERIFICATION_CODE": "Invalid verification code",
+    "VERIFICATION_CODE_EXPIRED": "Verification code expired",
+    "USER_ALREADY_VERIFIED": "User already verified",
+    "USER_NOT_VERIFIED": "User is not verified",
+    "UNAUTHORIZED": "Unauthorized",
+    "NOT_FOUND": "Not found",
+    "BAD_REQUEST": "Bad request",
+
+    "SUCCESS": "Success",
+    "LOGIN_SUCCESS": "Login success",
+    "REGISTER_SUCCESS": "Register success",
+    "VERIFICATION_SUCCESS": "Verification success",
+    "PROJECT_CREATED": "Project created",
+    "PROFILE_DATA_RECEIVED": "Profile data received",
+    "PROJECT_DETAILS_RECEIVED": "Project details received",
+    "PROJECTS_LIST_RECEIVED": "Paginated projects list received",
+    "LOGOUT": "Logout successful"
   }
 }

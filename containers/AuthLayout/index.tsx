@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 import useTranslationPrefix from 'hooks/useTranslationPrefix';
 
-import { FormContainer, Header } from './styles';
+import { FormContainer, Header, CaptchaDisclaimer } from './styles';
 
 type Props = {
   title: string;
@@ -21,6 +21,11 @@ const AuthLayout: React.FC<Props> = ({ title, children }) => {
       <FormContainer>
         <Header>{title}</Header>
         {children}
+        <CaptchaDisclaimer>
+          This site is protected by reCAPTCHA and the Google{' '}
+          <a href="https://policies.google.com/privacy">Privacy Policy</a> and{' '}
+          <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+        </CaptchaDisclaimer>
       </FormContainer>
     </>
   );
