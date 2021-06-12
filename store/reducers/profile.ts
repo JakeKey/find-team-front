@@ -41,7 +41,6 @@ export const profileReducer = (
     case PROFILE.UNSET_PROFILE_STATES_DONE:
       return {
         ...state,
-        isLoading: false,
         success: undefined,
         error: undefined,
       };

@@ -94,7 +94,6 @@ export const projectsReducer = (
     case PROJECTS.UNSET_PROJECTS_STATES_DONE:
       return {
         ...state,
-        isLoading: false,
         success: undefined,
         error: undefined,
       };

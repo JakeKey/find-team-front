@@ -18,8 +18,15 @@ const useAuth = ({
   const { push } = useRouter();
 
   const dispatch = useAppDispatch();
-  const { profile, error, success } = useAppSelector(profileSelectors.selectProfileState);
-  useToastCustom({ unsetAction: unsetProfileStatesAction, error, success });
+  const { profile, error, success, isLoading } = useAppSelector(
+    profileSelectors.selectProfileState
+  );
+  useToastCustom({
+    unsetAction: unsetProfileStatesAction,
+    error,
+    success,
+    showSuccess: false,
+  });
 
   const token = checkIfTokenExists();
   const isLoggedIn = !!profile && token;
@@ -29,6 +36,7 @@ const useAuth = ({
       dispatch(getProfileAction());
     };
 
+    if (isLoading) return;
     if (token && !profile) {
       getProfile();
       return;
@@ -38,7 +46,7 @@ const useAuth = ({
     } else if (redirectToDashboard && isLoggedIn) {
       push(DASHBOARD_ROUTE);
     }
-  }, [push, redirectToDashboard, redirectToLogin, isLoggedIn, token, profile, dispatch]);
+  }, [push, redirectToDashboard, redirectToLogin, isLoggedIn, token, profile, isLoading, dispatch]);
 };
 
 export default useAuth;

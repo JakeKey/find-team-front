@@ -18,7 +18,7 @@ const ProjectsList: React.FC = () => {
     projectsSelectors.selectProjectsState
   );
   const dispatch = useAppDispatch();
-  useToastCustom({ unsetAction: unsetProjectsStatesAction, error, success, showSuccess: false });
+  useToastCustom({ unsetAction: unsetProjectsStatesAction, error, success });
 
   const scrollParentRef = useRef(null);
 

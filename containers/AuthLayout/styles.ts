@@ -12,7 +12,8 @@ export const FormContainer = styled.div`
   color: ${colors.black};
 
   @media screen and (max-width: ${breakpoints.sm.max}px) {
-    margin-top: 0;
+    margin: 30px 0;
+    padding: 60px;
   }
 `;
 
