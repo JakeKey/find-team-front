@@ -1,34 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# find-team-front
 
-## Getting Started
+General idea of this project is to connect people that are looking to participate in development of a *real life* web applications and software.
 
-First, run the development server:
+Project is still in development, at the moment basic structure and few simple features has been created.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+[Demo](https://find-team.com)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# docker
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Build and run docker images (api + postgres):
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+docker-compose up --build -d
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+[on linux os admin privilages required]
 
-## Learn More
+Display all containers:
 
-To learn more about Next.js, take a look at the following resources:
+docker ps --all
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Delete running container and it's volumes:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+docker rm -vf [container/s]
 
-## Deploy on Vercel
+# ssl nginx
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To run nginx in docker with ssl certificates follow:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+https://www.digitalocean.com/community/tutorials/how-to-secure-a-containerized-node-js-application-with-nginx-let-s-encrypt-and-docker-compose
+
+NOTE: nginx/default.conf has to be edited before.
