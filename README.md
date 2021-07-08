@@ -8,7 +8,7 @@ Project is still in development, at the moment basic structure and few simple fe
 
 # docker
 
-Build and run docker images (api + postgres):
+Build and run docker images (next + nginx + certbot):
 
 docker-compose up --build -d
 
