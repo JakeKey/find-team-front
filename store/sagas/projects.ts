@@ -12,7 +12,6 @@ import {
   getAllProjectsActionError,
   unsetProjectsStatesActionDone,
 } from 'store/actions';
-import { ErrorCodes } from 'types/enums';
 import {
   CreateProjectResponseData,
   ResponseSuccess,
@@ -20,6 +19,8 @@ import {
   GetAllProjectsResponseData,
 } from 'types/interfaces';
 import api from 'utils/api';
+
+import { getErrorMessage } from '.';
 
 const {
   projects: { get, create, getAll },
@@ -32,7 +33,7 @@ export function* projectsCreate(
     const result = yield call(create, action.payload);
     yield put(createProjectActionSuccess(result));
   } catch (e) {
-    yield put(createProjectActionError(e?.message || ErrorCodes.SOMETHING_WENT_WRONG));
+    yield put(createProjectActionError(getErrorMessage(e)));
   }
 }
 
@@ -43,7 +44,7 @@ export function* projectsGet(
     const result = yield call(get, action.payload);
     yield put(getProjectActionSuccess(result));
   } catch (e) {
-    yield put(getProjectActionError(e?.message || ErrorCodes.SOMETHING_WENT_WRONG));
+    yield put(getProjectActionError(getErrorMessage(e)));
   }
 }
 
@@ -59,7 +60,7 @@ export function* projectsGetAll(
       })
     );
   } catch (e) {
-    yield put(getAllProjectsActionError(e?.message || ErrorCodes.SOMETHING_WENT_WRONG));
+    yield put(getAllProjectsActionError(getErrorMessage(e)));
   }
 }
 

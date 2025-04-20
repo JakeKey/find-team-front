@@ -10,7 +10,7 @@ import {
   unsetAuthStatesActionDone,
   VerifyActionType,
 } from 'store/actions';
-import { ErrorCodes, SuccessCodes } from 'types/enums';
+import { SuccessCodes } from 'types/enums';
 import {
   LoginResponseData,
   RegisterResponseData,
@@ -19,23 +19,25 @@ import {
 } from 'types/interfaces';
 import api from 'utils/api';
 
+import { getErrorMessage } from '.';
+
 const {
   auth: { register, login, verify },
 } = api;
 
 export function* authRegister(
-  action: RegisterActionType
+  action: RegisterActionType,
 ): Generator<StrictEffect, void, ResponseSuccess<RegisterResponseData>> {
   try {
     const result = yield call(register, action.payload);
     yield put(registerActionSuccess(result?.success || SuccessCodes.SUCCESS));
   } catch (e) {
-    yield put(registerActionError(e?.message || ErrorCodes.SOMETHING_WENT_WRONG));
+    yield put(registerActionError(getErrorMessage(e)));
   }
 }
 
 export function* authLogin(
-  action: LoginActionType
+  action: LoginActionType,
 ): Generator<StrictEffect, void, ResponseSuccess<LoginResponseData>> {
   try {
     const result = yield call(login, action.payload);
@@ -44,12 +46,12 @@ export function* authLogin(
     global.localStorage?.setItem('token', result.data.token);
     yield put(loginActionSuccess(result.success || SuccessCodes.LOGIN_SUCCESS));
   } catch (e) {
-    yield put(loginActionError(e?.message || ErrorCodes.SOMETHING_WENT_WRONG));
+    yield put(loginActionError(getErrorMessage(e)));
   }
 }
 
 export function* authVerify(
-  action: VerifyActionType
+  action: VerifyActionType,
 ): Generator<StrictEffect, void, ResponseSuccess<VerifyCodeResponseData>> {
   try {
     const result = yield call(verify, action.payload);
@@ -58,7 +60,7 @@ export function* authVerify(
     global.localStorage?.setItem('token', result.data.token);
     yield put(loginActionSuccess(result.success || SuccessCodes.VERIFICATION_SUCCESS));
   } catch (e) {
-    yield put(loginActionError(e?.message || ErrorCodes.SOMETHING_WENT_WRONG));
+    yield put(loginActionError(getErrorMessage(e)));
   }
 }
 

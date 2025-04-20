@@ -27,7 +27,7 @@ export const MenuIcon = styled(Icon)`
   ${iconStyles}
 `;
 
-export const Navigation = styled.nav<{ isMenuOpen: boolean }>`
+export const Navigation = styled.nav<{ $isMenuOpen: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -45,8 +45,8 @@ export const Navigation = styled.nav<{ isMenuOpen: boolean }>`
     & ${MenuIcon} {
       display: block;
     }
-    ${({ isMenuOpen }) =>
-      isMenuOpen &&
+    ${({ $isMenuOpen }) =>
+      $isMenuOpen &&
       css`
         flex-direction: column;
         justify-content: space-around;
@@ -70,7 +70,7 @@ export const Navigation = styled.nav<{ isMenuOpen: boolean }>`
   }
 `;
 
-export const NavButton = styled.div<{ isActive: boolean }>`
+export const NavButton = styled.div<{ $isActive: boolean }>`
   display: inline-block;
   font-size: 18px;
   font-weight: bold;
@@ -86,8 +86,8 @@ export const NavButton = styled.div<{ isActive: boolean }>`
     }
   }
 
-  ${({ isActive }) =>
-    isActive &&
+  ${({ $isActive }) =>
+    $isActive &&
     css`
       background-color: ${colors.darkGray};
     `}

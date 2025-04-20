@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
-import { ReCaptcha } from 'react-recaptcha-v3';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 import AuthLayout from 'containers/AuthLayout';
 import LinkButton from 'components/LinkButton';
@@ -16,7 +16,6 @@ import { useAppDispatch, useAppSelector } from 'store';
 import { verifyAction, unsetAuthStatesAction } from 'store/actions';
 import { authSelectors } from 'store/selectors';
 import { ErrorCodes } from 'types/enums';
-import { RECAPTCHA_SITE_KEY } from 'utils/api';
 
 const Verify: React.FC = () => {
   const t = useTranslationPrefix('Auth');
@@ -24,7 +23,7 @@ const Verify: React.FC = () => {
   const dispatch = useAppDispatch();
   const { error, success, isLoading } = useAppSelector(authSelectors.selectAuthState);
   const [callRequested, setCallRequested] = useState(false);
-  const [recaptchaToken, setRecaptchaToken] = useState('');
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const { query } = useRouter();
   useToastCustom({ unsetAction: unsetAuthStatesAction, error, success });
   const { showSuccess, showError } = useRequestState({ callRequested, error, success });
@@ -33,33 +32,30 @@ const Verify: React.FC = () => {
 
   useEffect(() => {
     const verifyCodeHandler = async (): Promise<void> => {
-      if (!recaptchaToken || !code) {
+      if (!executeRecaptcha || !code) {
         toast.error(tc(ErrorCodes.SOMETHING_WENT_WRONG));
         return;
       }
+
+      const token = await executeRecaptcha('verify');
 
       setCallRequested(true);
 
       dispatch(
         verifyAction({
           code,
-          reCaptchaResponse: recaptchaToken,
-        })
+          reCaptchaResponse: token,
+        }),
       );
     };
 
-    if (code && recaptchaToken && !callRequested) {
+    if (code && !callRequested) {
       verifyCodeHandler();
     }
-  }, [code, recaptchaToken, dispatch, tc, callRequested]);
+  }, [code, dispatch, tc, callRequested]);
 
   return (
     <AuthLayout title={t('verify_title')}>
-      <ReCaptcha
-        action="code_verify"
-        verifyCallback={(token: string) => setRecaptchaToken(token)}
-        sitekey={RECAPTCHA_SITE_KEY}
-      />
       {isLoading ? (
         <Loader />
       ) : showSuccess ? (

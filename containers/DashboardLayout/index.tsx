@@ -1,4 +1,4 @@
-import { memo, ReactNode } from 'react';
+import { memo, ReactNode, useEffect, useState } from 'react';
 import Head from 'next/head';
 
 import NavBar from 'components/NavBar';
@@ -15,8 +15,11 @@ type Props = {
 
 const DashboardLayout: React.FC<Props> = ({ title, children }) => {
   const t = useTranslationPrefix('General');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const isLoggedIn = checkIfTokenExists();
+  useEffect(() => {
+    setIsLoggedIn(checkIfTokenExists());
+  }, []);
 
   return (
     <>

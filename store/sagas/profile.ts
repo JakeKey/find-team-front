@@ -5,10 +5,11 @@ import {
   getProfileActionError,
   unsetProfileStatesActionDone,
 } from 'store/actions';
-import { ErrorCodes } from 'types/enums';
 import { ResponseSuccess, GetProfileResponseData } from 'types/interfaces';
 import api from 'utils/api';
 import { checkIfTokenExists } from 'utils/helpers';
+
+import { getErrorMessage } from '.';
 
 const {
   profile: { get },
@@ -25,7 +26,7 @@ export function* profileGet(): Generator<
   } catch (e) {
     const tokenExist = checkIfTokenExists();
     if (tokenExist) global.localStorage?.removeItem('token');
-    yield put(getProfileActionError(e?.message || ErrorCodes.SOMETHING_WENT_WRONG));
+    yield put(getProfileActionError(getErrorMessage(e)));
   }
 }
 

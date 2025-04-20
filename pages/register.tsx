@@ -1,8 +1,8 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { toast } from 'react-toastify';
-import { ReCaptcha } from 'react-recaptcha-v3';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 import AuthLayout from 'containers/AuthLayout';
 import RegisterForm, { RegisterFormTypes } from 'containers/RegisterForm';
@@ -16,7 +16,6 @@ import { useAppDispatch, useAppSelector } from 'store';
 import { registerAction, unsetAuthStatesAction } from 'store/actions';
 import { authSelectors } from 'store/selectors';
 import { ErrorCodes } from 'types/enums';
-import { RECAPTCHA_SITE_KEY } from 'utils/api';
 
 const Register: React.FC = () => {
   useAuth({ redirectToDashboard: true });
@@ -25,16 +24,14 @@ const Register: React.FC = () => {
   const dispatch = useAppDispatch();
   const { error, success, isLoading } = useAppSelector(authSelectors.selectAuthState);
   const [callRequested, setCallRequested] = useState(false);
-  const [recaptchaToken, setRecaptchaToken] = useState('');
   useToastCustom({ unsetAction: unsetAuthStatesAction, error, success });
   const { showSuccess } = useRequestState({ callRequested, error, success });
 
-  const recaptchaRef = useRef<ReCaptcha>();
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const handleSubmit = useCallback(
     async (values: RegisterFormTypes): Promise<void> => {
-      if (!recaptchaToken) {
-        recaptchaRef.current?.execute();
+      if (!executeRecaptcha) {
         toast.error(tc(ErrorCodes.INVALID_CAPTCHA));
         return;
       }
@@ -43,6 +40,7 @@ const Register: React.FC = () => {
         return;
       }
       const { username, password, email, position } = values;
+      const token = await executeRecaptcha('register');
 
       setCallRequested(true);
 
@@ -52,23 +50,15 @@ const Register: React.FC = () => {
           password,
           email,
           position: position || undefined,
-          reCaptchaResponse: recaptchaToken,
-        })
+          reCaptchaResponse: token,
+        }),
       );
-
-      recaptchaRef.current?.execute();
     },
-    [recaptchaToken, dispatch, isLoading, tc, recaptchaRef]
+    [dispatch, isLoading, tc, executeRecaptcha],
   );
 
   return (
     <AuthLayout title={t('register')}>
-      <ReCaptcha
-        ref={(ref) => ref && (recaptchaRef.current = ref)}
-        action="register"
-        verifyCallback={(token: string) => setRecaptchaToken(token)}
-        sitekey={RECAPTCHA_SITE_KEY}
-      />
       {showSuccess ? (
         <div>{t('register_success')}</div>
       ) : (
