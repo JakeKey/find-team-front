@@ -49,10 +49,10 @@ const Verify: React.FC = () => {
       );
     };
 
-    if (code && !callRequested) {
+    if (code && !callRequested && executeRecaptcha) {
       verifyCodeHandler();
     }
-  }, [code, dispatch, tc, callRequested]);
+  }, [code, dispatch, tc, callRequested, executeRecaptcha]);
 
   return (
     <AuthLayout title={t('verify_title')}>

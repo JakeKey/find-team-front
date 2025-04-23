@@ -12,6 +12,8 @@ import { PROJECTS_LIST_LIMIT } from 'utils/constants';
 
 import { Wrapper, ScrollContent } from './styles';
 
+const PAGE_START = 0;
+
 const ProjectsList: React.FC = () => {
   const { hasMore, isLoading, error, success, projects } = useAppSelector(
     projectsSelectors.selectProjectsState,
@@ -26,7 +28,7 @@ const ProjectsList: React.FC = () => {
   }, [dispatch, projects.length]);
 
   useEffect(() => {
-    dispatch && dispatch(getAllProjectsAction({ page: 0, limit: PROJECTS_LIST_LIMIT }));
+    dispatch && dispatch(getAllProjectsAction({ page: PAGE_START, limit: PROJECTS_LIST_LIMIT }));
   }, [dispatch]);
 
   return (
