@@ -41,14 +41,15 @@ const Login: React.FC = () => {
       const { usernameOrEmail, password } = values;
       const isEmail = usernameOrEmail.includes('@');
 
-      dispatch(
-        loginAction({
-          username: !isEmail ? usernameOrEmail : undefined,
-          password,
-          email: isEmail ? usernameOrEmail : undefined,
-          reCaptchaResponse: token,
-        }),
-      );
+      !!executeRecaptcha &&
+        dispatch(
+          loginAction({
+            username: !isEmail ? usernameOrEmail : undefined,
+            password,
+            email: isEmail ? usernameOrEmail : undefined,
+            reCaptchaResponse: token,
+          }),
+        );
     },
     [executeRecaptcha, dispatch, isLoading, tc],
   );

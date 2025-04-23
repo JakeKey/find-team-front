@@ -44,15 +44,16 @@ const Register: React.FC = () => {
 
       setCallRequested(true);
 
-      dispatch(
-        registerAction({
-          username,
-          password,
-          email,
-          position: position || undefined,
-          reCaptchaResponse: token,
-        }),
-      );
+      !!executeRecaptcha &&
+        dispatch(
+          registerAction({
+            username,
+            password,
+            email,
+            position: position || undefined,
+            reCaptchaResponse: token,
+          }),
+        );
     },
     [dispatch, isLoading, tc, executeRecaptcha],
   );
