@@ -10,6 +10,7 @@ RUN yarn install --frozen-lockfile
 FROM node:alpine AS builder
 WORKDIR /app
 
+#ENV NODE_OPTIONS --openssl-legacy-provider
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
 RUN yarn build && yarn install --production --ignore-scripts --prefer-offline

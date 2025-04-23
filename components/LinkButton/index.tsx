@@ -11,7 +11,7 @@ type Props = {
 
 const LinkButton: React.FC<Props> = ({ href, text, center }) => {
   return (
-    <Wrapper center={center}>
+    <Wrapper $center={center}>
       <Link href={href}>{text}</Link>
     </Wrapper>
   );

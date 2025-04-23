@@ -17,7 +17,7 @@ export const fetchApi = async <T>(
   dataReq?: {
     body?: Record<string, unknown>;
     query?: Record<string, string | number | UserPositions>;
-  }
+  },
 ): Promise<ResponseSuccess<T>> => {
   const token = global.localStorage?.getItem('token');
 

@@ -1,5 +1,5 @@
-import { memo, useCallback, useRef } from 'react';
-import InfiniteScroll from 'react-infinite-scroller';
+import { memo, useCallback, useEffect } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 import ProjectCard from 'components/ProjectCard';
 import Loader from 'components/Loader';
@@ -12,32 +12,35 @@ import { PROJECTS_LIST_LIMIT } from 'utils/constants';
 
 import { Wrapper, ScrollContent } from './styles';
 
+const PAGE_START = 0;
+
 const ProjectsList: React.FC = () => {
-  const PAGE_START = -1;
   const { hasMore, isLoading, error, success, projects } = useAppSelector(
-    projectsSelectors.selectProjectsState
+    projectsSelectors.selectProjectsState,
   );
   const dispatch = useAppDispatch();
   useToastCustom({ unsetAction: unsetProjectsStatesAction, error, success });
 
-  const scrollParentRef = useRef(null);
+  const loadMore = useCallback(() => {
+    const page = Math.ceil(projects.length / PROJECTS_LIST_LIMIT);
 
-  const loadMore = useCallback(
-    (page) => {
-      dispatch(getAllProjectsAction({ page, limit: PROJECTS_LIST_LIMIT }));
-    },
-    [dispatch]
-  );
+    dispatch(getAllProjectsAction({ page, limit: PROJECTS_LIST_LIMIT }));
+  }, [dispatch, projects.length]);
+
+  useEffect(() => {
+    dispatch && dispatch(getAllProjectsAction({ page: PAGE_START, limit: PROJECTS_LIST_LIMIT }));
+  }, [dispatch]);
 
   return (
-    <Wrapper ref={scrollParentRef}>
+    <Wrapper>
       <InfiniteScroll
-        pageStart={PAGE_START}
-        loadMore={loadMore}
+        next={loadMore}
+        dataLength={projects.length}
         hasMore={!error && !isLoading && hasMore}
-        getScrollParent={() => scrollParentRef.current}
-        threshold={100}
         loader={<Loader key={0} />}
+        scrollThreshold="100px"
+        scrollableTarget={Wrapper}
+        style={{ overflow: 'hidden' }}
       >
         <ScrollContent>
           {projects.map((project) => (

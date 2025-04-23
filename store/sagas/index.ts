@@ -1,6 +1,7 @@
 import { takeLatest, takeLeading } from 'redux-saga/effects';
 
 import { AUTH, PROFILE, PROJECTS } from 'store/actions';
+import { ErrorCodes } from 'types/enums';
 
 import { authRegister, authLogin, authVerify, authUnsetStates } from './auth';
 import { profileGet, profileUnsetStates } from './profile';
@@ -19,4 +20,10 @@ export default function* rootSaga(): Generator {
 
   yield takeLatest(PROFILE.GET_PROFILE_REQUESTED, profileGet);
   yield takeLatest(PROFILE.UNSET_PROFILE_STATES_REQUESTED, profileUnsetStates);
+}
+
+export const getErrorMessage = (e: unknown): ErrorCodes => {
+  const message = e instanceof Error && e?.message || '';
+
+  return Object.keys(ErrorCodes).includes(message) ? message as ErrorCodes : ErrorCodes.SOMETHING_WENT_WRONG;
 }

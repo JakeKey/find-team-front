@@ -22,13 +22,13 @@ const NavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [logout, setLogout] = useState(false);
 
-  const token = checkIfTokenExists();
-
   useEffect(() => {
-    if (!token && logout) {
+    const tokenExist = checkIfTokenExists();
+
+    if (!tokenExist && logout) {
       push(LOGIN_ROUTE);
     }
-  }, [token, logout, push]);
+  }, [logout, push]);
 
   const handleLogout = (): void => {
     global.localStorage?.removeItem('token');
@@ -40,15 +40,15 @@ const NavBar: React.FC = () => {
   };
 
   return (
-    <Navigation isMenuOpen={isMenuOpen}>
+    <Navigation $isMenuOpen={isMenuOpen}>
       <div>
-        <NavButton isActive={MENU_ROUTES.DASHBOARD === route}>
+        <NavButton $isActive={MENU_ROUTES.DASHBOARD === route}>
           <Link href={MENU_ROUTES.DASHBOARD}>{t('my_projects')}</Link>
         </NavButton>
-        <NavButton isActive={MENU_ROUTES.BROWSE === route}>
+        <NavButton $isActive={MENU_ROUTES.BROWSE === route}>
           <Link href={MENU_ROUTES.BROWSE}>{t('browse_projects')}</Link>
         </NavButton>
-        <NavButton isActive={MENU_ROUTES.NEW === route}>
+        <NavButton $isActive={MENU_ROUTES.NEW === route}>
           <Link href={MENU_ROUTES.NEW}>{t('create_new_project')}</Link>
         </NavButton>
       </div>

@@ -1,6 +1,6 @@
 import { Field } from 'formik';
 import styled, { css } from 'styled-components';
-import InputMask from 'react-input-mask';
+import { InputMask } from '@react-input/mask';
 
 import { colors } from 'styles';
 
